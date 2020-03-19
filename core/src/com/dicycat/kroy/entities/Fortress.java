@@ -47,14 +47,11 @@ public class Fortress extends Entity {
 		dispenser.addPattern(new Pattern(false, 0, 3, 100, 900, 0.02f, 1, 0.2f, this.getDamage()));
 		dispenser.addPattern(new Pattern(true, 0, 1, 100, 900, 0.02f, 1, 1.2f,this.getDamage()));
 
-		// FORTRESS_HEALTH_3 - END OF MODIFICATION - NP STUDIOS
+		// FORTRESS_DAMAGE_3 - END OF MODIFICATION - NP STUDIOS
 
 		this.deadTexture = deadTexture;
 
-		// END_GAME_FIX_2 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT
 		// Deleted addFortress call
-		// END_GAME_FIX_2 - END OF MODIFICATION - NP STUDIOS
-
 		healthBar = new StatBar(new Vector2(getCentre().x, getCentre().y + 100), "Red.png", 10);
 		Kroy.mainGameScreen.addGameObject(healthBar);
 	}
