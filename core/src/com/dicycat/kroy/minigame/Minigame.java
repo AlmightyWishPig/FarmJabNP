@@ -47,7 +47,7 @@ public class Minigame {
     /**
      *	Allows to have multiple versions of the Minigame without needing to create multiple Stages.
      */
-    public static enum State{
+    public enum State{
         GAME1,
         GAME2,
         GAME3,
@@ -69,7 +69,7 @@ public class Minigame {
         table.setBackground(background);
 
         Random rand = new Random();
-        Integer config = rand.nextInt(3);
+        int config = rand.nextInt(3);
         if (config == 0) {
             state = State.GAME1;
             pipes.add(new Pipe(1, 1));
@@ -150,7 +150,7 @@ public class Minigame {
                 for (Pipe pipe : pipes){
                    flag = flag & pipe.isCorrect();
                 }
-                if (flag == true){
+                if (flag){
                     table.reset();
                     state = State.WON;
                     updateDraw();
@@ -167,7 +167,6 @@ public class Minigame {
                     else {
                         Kroy.mainGameScreen.setGameState(GameScreen.GameScreenState.RUN);
                     }
-                    return;
             }
         });// Returns the user to the screen they were in before the minigame was started.
     }
@@ -176,7 +175,7 @@ public class Minigame {
      * Draws the pipes in their current rotation once a click event occurs. Also draws the end of game screen
      * if the user correctly completes the puzzle.
      */
-    public void updateDraw(){
+    private void updateDraw(){
         switch(state) {
             case GAME1:
                 table.row();
