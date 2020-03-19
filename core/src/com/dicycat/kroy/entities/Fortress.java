@@ -22,10 +22,10 @@ public class Fortress extends Entity {
 	// FORTRESS_DAMAGE_1 - END OF MODIFICATION - NP STUDIOS
 
 	/**
-	 * @param spawnPos
-	 * @param fortressTexture
-	 * @param deadTexture
-	 * @param size
+	 * @param spawnPos the position the Fortress is spawned in
+	 * @param fortressTexture the texture of the Fortress while alive
+	 * @param deadTexture the texture of the Fortress when dead
+	 * @param size the size of the Fortress hitbox
 	 */
 
 	// FORTRESS_HEALTH_2 - START OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE ----
@@ -106,7 +106,7 @@ public class Fortress extends Entity {
 
 	}
 
-	public int getDamage(){				// FORTRESS_DAMAGE_2 - START OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE ----
+	private int getDamage(){				// FORTRESS_DAMAGE_2 - START OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE ----
 		return this.damage;				// Implemented a getter for damage
 	}									// FORTRESS_DAMAGE_2 - END OF MODIFICATION - NP STUDIOS
 

@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.GameObject;
 import com.dicycat.kroy.Kroy;
-import com.dicycat.kroy.gamemap.TiledGameMap;
 
 /**
  * Class for interactive gameObjects
@@ -66,13 +65,10 @@ public abstract class Entity extends GameObject{
 	 * Checks if the player is within the radius of the Entity
 	 * @return playerInRadius
 	 */
-	protected Boolean playerInRadius() {
+	Boolean playerInRadius() {
 		Vector2 currentCoords = Kroy.mainGameScreen.getPlayer().getCentre(); // get current player coordinates
-		if (Vector2.dst(currentCoords.x, currentCoords.y, getCentre().x, getCentre().y) < radius ) { // checks the distance between the two entities
-			return true; // returns true if distance between entity and player is less than radius of item
-		}else {
-			return false; // returns false otherwise
-		}
+		// checks the distance between the two entities
+		return Vector2.dst(currentCoords.x, currentCoords.y, getCentre().x, getCentre().y) < radius; // returns true if distance between entity and player is less than radius of item
 	}
 	
 	public int getHealthPoints(){
