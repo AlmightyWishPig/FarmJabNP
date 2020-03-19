@@ -19,7 +19,7 @@ public class Pipe {
     private int rotation;
     private int correctRotation;
 
-    public Pipe(int type, int correctRotation){
+    Pipe(int type, int correctRotation){
         this.correctRotation = correctRotation;
         this.type = type;
         Random rand = new Random();
@@ -53,7 +53,7 @@ public class Pipe {
             }else {
                 this.image = new Texture("pipeT-3.png");
             }
-        }else if (type == 3) {
+        }else {
             this.image = new Texture("pipeX.png");
             this.rotation = 0;
         }
@@ -68,7 +68,7 @@ public class Pipe {
      * Replaces the image of the pipe with one rotated by 90 degrees
      * And changes the variable representing the current rotation accordingly
      */
-    public void rotate(){
+    void rotate(){
         if (this.type == 0){
             this.rotation = (this.rotation + 1) % 2;
             String file = "pipeI-"+this.rotation+".png";
@@ -91,7 +91,7 @@ public class Pipe {
      * Checks if the orientation of the pipe is correct
      * @return true if correct, otherwise false
      */
-    public boolean isCorrect(){
+    boolean isCorrect(){
         if (this.rotation == this.correctRotation){
             System.out.println("true");
             return true;
