@@ -67,7 +67,6 @@ public abstract class Entity extends GameObject{
 	 */
 	Boolean playerInRadius() {
 		Vector2 currentCoords = Kroy.mainGameScreen.getPlayer().getCentre(); // get current player coordinates
-		// checks the distance between the two entities
 		return Vector2.dst(currentCoords.x, currentCoords.y, getCentre().x, getCentre().y) < radius; // returns true if distance between entity and player is less than radius of item
 	}
 	

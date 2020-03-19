@@ -103,7 +103,6 @@ public class Fortress extends Entity {
 				Kroy.mainGameScreen.addGameObject(bullet);
 			}
 		}
-
 	}
 
 	private int getDamage(){				// FORTRESS_DAMAGE_2 - START OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE ----

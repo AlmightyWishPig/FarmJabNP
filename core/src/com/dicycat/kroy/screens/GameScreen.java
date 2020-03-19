@@ -152,6 +152,8 @@ public class GameScreen implements Screen{
 		}
 		// PATROLS_4 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT ------------
 
+		//INSERT POWERUPS HERE
+
 
 		// FORTRESS_HEALTH_1 - START OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE ----
 		// Added health and damage values for each fortress instantiation

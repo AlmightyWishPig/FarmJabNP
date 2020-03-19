@@ -37,7 +37,8 @@ public class FireTruck extends Entity{
 	private WaterStream water;
 	private StatBar tank;
 	private StatBar healthBar;
-	private boolean firing;
+	private boolean firing, hasSpeed, hasDamage, hasShield; //Booleans to track what powerups the truck has active
+	private float speedTimer, damageTimer, shieldTimer; //Timers to track when powerups needs to be removed
 	private float range;
 
 	public FireTruck(Vector2 spawnPos, Float[] truckStats, int truckNum) {
@@ -152,7 +153,7 @@ public class FireTruck extends Entity{
 			ArrayList<GameObject> inRange = entitiesInRange();		//find list of enemies in range
 
 			if(inRange.isEmpty() || (currentWater<=0)){				//Removes the water stream if nothing is in range
-				firing=false;
+				firing = false;
 				water.setRemove(true);
 			}else if(!firing){					//Adds the water stream if something comes into range
 				water= new WaterStream(Vector2.Zero);
@@ -320,4 +321,21 @@ public class FireTruck extends Entity{
 		this.selected = selected;
 	}
 	// TRUCK_SELECT_CHANGE_8 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
+
+	public void powerup(String type) {
+		switch (type) {
+			case "speed":
+				this.speed += this.speed * 0.1;
+				this.hasSpeed = true;
+				this.speedTimer = 0;
+			case "damage":
+				this.flowRate += this.flowRate * 0.1;
+				this.hasDamage = true;
+				this.damageTimer = 0;
+			case "shield":
+				this.hasShield = true;
+				this.shieldTimer = 0;
+			case "refill": this.refillWater();
+		}
+	}
 }
