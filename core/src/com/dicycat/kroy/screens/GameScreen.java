@@ -38,7 +38,7 @@ import com.dicycat.kroy.scenes.PauseWindow;
  */
 public class GameScreen implements Screen{
 
-	public static enum GameScreenState{
+	public enum GameScreenState{
 		PAUSE,
 		RUN,
 		RESUME,
@@ -53,7 +53,7 @@ public class GameScreen implements Screen{
 	private Texture minimap = new Texture("YorkMap.png"); // A .png version of the tilemap background to use as the background texture for the minimap.
 	// MINIMAP_1 - END OF MODIFICATION - NP STUDIOS - BETHANY GILMORE
 	
-	public GameScreenState state = GameScreenState.RUN;
+	private GameScreenState state = GameScreenState.RUN;
 	
 	public static TiledGameMap gameMap;
 	
@@ -62,7 +62,6 @@ public class GameScreen implements Screen{
 	
 	private HUD hud;
 	private PauseWindow pauseWindow;
-	private OptionsWindow optionsWindow;
 	private Minigame minigame;
 
 	// TRUCK_SELECT_CHANGE_11 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
@@ -85,7 +84,7 @@ public class GameScreen implements Screen{
 	private Vector2 spawnPosition;	//Coordinates the player spawns at
 	
 	private List<GameObject> gameObjects, deadObjects;	//List of active game objects
-	private List<GameObject> objectsToRender = new ArrayList<GameObject>(); // List of game objects that have been updated but need rendering
+	private List<GameObject> objectsToRender = new ArrayList<>(); // List of game objects that have been updated but need rendering
 	private List<GameObject> objectsToAdd;
 	private List<DebugDraw> debugObjects; //List of debug items
 
@@ -101,7 +100,7 @@ public class GameScreen implements Screen{
 		gameMap = new TiledGameMap();										//or FitPort to make it fit into a specific width/height ratio
 		pauseWindow = new PauseWindow(game);
 		pauseWindow.visibility(false);
-		optionsWindow = new OptionsWindow(game);
+		OptionsWindow optionsWindow = new OptionsWindow(game);
 		optionsWindow.visibility(false);
 //		minigame = new Minigame(game);
 //		minigame.visibility(false);
@@ -122,10 +121,10 @@ public class GameScreen implements Screen{
 	 */
 	@Override
 	public void show() {
-		objectsToAdd = new ArrayList<GameObject>();
-		gameObjects = new ArrayList<GameObject>();
-		deadObjects = new ArrayList<GameObject>();
-		debugObjects = new ArrayList<DebugDraw>();
+		objectsToAdd = new ArrayList<>();
+		gameObjects = new ArrayList<>();
+		deadObjects = new ArrayList<>();
+		debugObjects = new ArrayList<>();
 
 		// TRUCK_SELECT_CHANGE_13 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 		// Adds all the different firetruck types to the players ArrayList
@@ -135,9 +134,8 @@ public class GameScreen implements Screen{
 		players.add(new FireTruck(new Vector2(spawnPosition.x, spawnPosition.y - 50), truckStats[3], 3));
 
 		// Iterates through the players array lists and adds them to gameObjects.
-		for (FireTruck truck : players) {
-			gameObjects.add(truck);	//Player
-		}
+		//Player
+		gameObjects.addAll(players);
 
 		// Sets initial camera position to the active truck's position (set to arbitrary truck at the beginning of the game)
 		gamecam.translate(new Vector2(players.get(activeTruck).getX(),players.get(activeTruck).getY())); // sets initial Camera position
@@ -266,7 +264,7 @@ public class GameScreen implements Screen{
 	 * Respawns the player if necessary.
 	 */
 	private void updateLoop() {
-		List<GameObject> toRemove = new ArrayList<GameObject>();
+		List<GameObject> toRemove = new ArrayList<>();
 		for (GameObject gObject : gameObjects) {	//Go through every game object
 			gObject.update();						//Update the game object
 			if (gObject.isRemove()) {				//Check if game object is to be removed
@@ -281,15 +279,13 @@ public class GameScreen implements Screen{
 				deadObjects.add(rObject);
 			}
 		}
-		for (GameObject aObject : objectsToAdd) {		//Add game objects to be added
-			gameObjects.add(aObject);
-		}
+		//Add game objects to be added
+		gameObjects.addAll(objectsToAdd);
 
 		objectsToAdd.clear();	// Clears list as not to add new objects twice
 
-		for (GameObject dObject : deadObjects) { // loops through the destroyed but displayed items (such as destroyed bases)
-			objectsToRender.add(dObject);
-		}
+		// loops through the destroyed but displayed items (such as destroyed bases)
+		objectsToRender.addAll(deadObjects);
 		// TRUCK_SELECT_CHANGE_15 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 		// Changed to check if the active truck is destroyed and then updates lives if so
 		if (players.get(activeTruck).isRemove()) {	//If the player is set for removal, respawn
@@ -335,7 +331,7 @@ public class GameScreen implements Screen{
 	 *
 	 * @author Bethany Gilmore - NP STUDIOS
 	 */
-	public void drawMinimap(){
+	private void drawMinimap(){
 		game.batch.begin();
 		game.batch.draw(minimap, 0, 0, 394, 350);
 
@@ -373,7 +369,7 @@ public class GameScreen implements Screen{
 		// Added an if statement to fully ensure debugging view is requested as we noticed the original teams debug
 		// code causes a memory leak and possibly crashes the game overtime.
 		if (showDebug) {
-		debugObjects.add(new DebugLine(start, end, lineWidth, colour));
+			debugObjects.add(new DebugLine(start, end, lineWidth, colour));
 		}
 		// END OF MODIFICATION - NP STUDIOS -----------------------------------------
 	}
@@ -453,10 +449,6 @@ public class GameScreen implements Screen{
 	public List<GameObject> getGameObjects(){
 		return gameObjects;
 	}
-	
-	public int getLives() {
-		return lives;
-	}
 
 	/**
 	 * Checks the pause buttons for input
@@ -484,7 +476,6 @@ public class GameScreen implements Screen{
 	    	public void clicked(InputEvent event, float x, float y) {
 	    		dispose();
 	    		game.backToMenu();
-	    		return;
 	    	}
 	    });
 	}
@@ -518,7 +509,7 @@ public class GameScreen implements Screen{
 	/**
 	 * Calls game over if lives == 0, otherwise removes 1 from life counter
 	 */
-	public void updateLives() {
+	private void updateLives() {
 		if (lives>1) {
 			lives -= 1;
 			respawn();
@@ -531,11 +522,11 @@ public class GameScreen implements Screen{
 	/**
 	 * Respawns the player at the spawn position and updates the HUD
 	 */
-	public void respawn() {
+	private void respawn() {
 		// TRUCK_SELECT_CHANGE_17 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 		// Picks first alive truck and sets this to the new active one when the current active one is killed
 		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).isRemove() == false) {
+			if (!players.get(i).isRemove()) {
 				activeTruck = i;
 				break;
 			}
@@ -553,7 +544,7 @@ public class GameScreen implements Screen{
 
 	// TRUCK_SELECT_CHANGE_18 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	// Sets the selected variable on each of the trucks to false and then sets the active trucks selected variable to true
-	public void selectTruck() {
+	private void selectTruck() {
 		for (FireTruck truck : players) {
 			truck.setSelected(false);
 		}
