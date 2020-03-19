@@ -10,9 +10,9 @@ import com.badlogic.gdx.math.Matrix4;
  *
  */
 public abstract class DebugDraw {
-	protected ShapeRenderer debugRenderer;	//Shape renderer for drawing debug shapes
+	ShapeRenderer debugRenderer;	//Shape renderer for drawing debug shapes
 	
-	public DebugDraw() {
+	DebugDraw() {
 		debugRenderer = new ShapeRenderer();
 	}
 	

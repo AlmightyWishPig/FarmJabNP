@@ -13,10 +13,10 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public class DebugLine extends DebugDraw {
-	Vector2 start;
-	Vector2 end;
-	int lineWidth;
-	Color color;
+	private Vector2 start;
+	private Vector2 end;
+	private int lineWidth;
+	private Color color;
 
 	/**
 	 * @param a Start point of the line

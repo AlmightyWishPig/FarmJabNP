@@ -13,10 +13,10 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public class DebugRect extends DebugDraw {
-	Vector2 bottomLeft;
-	Vector2 dimensions;
-	int lineWidth;
-	Color color;
+	private Vector2 bottomLeft;
+	private Vector2 dimensions;
+	private int lineWidth;
+	private Color color;
 
 	/**
 	 * @param bLeft Bottom left of the rectangle

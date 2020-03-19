@@ -31,7 +31,7 @@ public class BulletDispenser {
 	 */
 	public BulletDispenser(Entity creator) {
 		owner = creator;
-		patterns = new ArrayList<Pattern>();
+		patterns = new ArrayList<>();
 		currentPattern = 0;
 		bulletTimer = 0;
 		patternTimer = 0;

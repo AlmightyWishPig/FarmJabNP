@@ -13,10 +13,10 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public class DebugCircle extends DebugDraw {
-	Vector2 position;
-	float radius;
-	int lineWidth;
-	Color color;
+	private Vector2 position;
+	private float radius;
+	private int lineWidth;
+	private Color color;
 
 	/**
 	 * @param pos Position to draw at

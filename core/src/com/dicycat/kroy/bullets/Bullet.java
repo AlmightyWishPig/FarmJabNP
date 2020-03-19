@@ -33,7 +33,7 @@ public class Bullet extends GameObject {
 	 * @param range distance the bullet should travel before it is removed
 	 * Edited by Lucy Ivatt - NP STUDIOS
 	 */
-	public Bullet(Vector2 spawnPos, Vector2 direction, int speed, float range, int patternDamage) {	//Constructor
+	Bullet(Vector2 spawnPos, Vector2 direction, int speed, float range, int patternDamage) {	//Constructor
 		super(spawnPos, Kroy.mainGameScreen.textures.getBullet(), new Vector2(20,20));
 
 		// FORTRESS_DAMAGE_6 - START OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE ----
@@ -61,7 +61,7 @@ public class Bullet extends GameObject {
 	 * Calculate velocity of the bullet (Translation per frame)
 	 * @param newDir New direction of the bullet
 	 */
-	public void changeDirection(Vector2 newDir) {
+	void changeDirection(Vector2 newDir) {
 		velocity = newDir.scl(speed);
 	}
 

@@ -103,7 +103,7 @@ public class Pattern {
 
 		int degree;	//Convert normal bearings (0 is up, clockwise) to LIBGDX Vector2 degrees (0 is right, anti-clockwise)
 
-		Vector2 direction = Vector2.Zero;
+		Vector2 direction;
 		for (int i = 0; i < patternLength; i++) {
 			degree = (clockwise) ? 10 : -10;
 			degree = 90 - (i*degree) + startAngle;
@@ -125,7 +125,7 @@ public class Pattern {
 	 * @param set The set of bullets to fire
 	 * @return Set of bullets to fire
 	 */
-	public Bullet[] bulletSet(int set) {
+	Bullet[] bulletSet(int set) {
 		return bullets[set];
 	}
 
@@ -135,7 +135,7 @@ public class Pattern {
 	 * @param aimDir The direction the bullets should fire
 	 * @return Set of aimed bullets to fire
 	 */
-	public Bullet[] aimedSet(int set, Vector2 aimDir) {
+	Bullet[] aimedSet(int set, Vector2 aimDir) {
 		Vector2 direction;
 		for (int i = 0; i < bullets[set].length; i++) {
 			direction = new Vector2(1, 1);
@@ -145,8 +145,8 @@ public class Pattern {
 		return bullets[set];
 	}
 
-	public Boolean getAim() { return aim; }	
-	public Bullet[][] getBullets(){return bullets;}
-	public float getWaitTime(){return waitTime;}
+	Boolean getAim() { return aim; }
+	Bullet[][] getBullets(){return bullets;}
+	float getWaitTime(){return waitTime;}
 	public float getCooldown(){return cooldown;}
 }
