@@ -16,8 +16,8 @@ import java.util.Random;
  */
 public class Alien extends Entity {
 
-	BulletDispenser dispenser;
-	int speed;
+	private BulletDispenser dispenser;
+	private int speed;
 
 	private Vector2[] waypoints; // The waypoints that the alien will follow
 	private int currentWaypoint; // The waypoint index the alien is currently at
