@@ -30,6 +30,6 @@ public class WaterStream extends GameObject{
 	// CODE_REFACTOR_4 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT
 	// Added override tag
 	@Override
-	public void update() {}
+	public void update(float delta) {}
 	// CODE_REFACTOR_4 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT
 }

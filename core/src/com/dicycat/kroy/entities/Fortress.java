@@ -94,7 +94,7 @@ public class Fortress extends Entity {
 	 * Updates the dispenser associated with the fortress and adds bullets to the mainGameScreen
 	 */
 	@Override
-	public void update() {
+	public void update(float delta) {
 		//weapons
 		Bullet[] toShoot = dispenser.update(playerInRadius());
 		if (toShoot != null) {

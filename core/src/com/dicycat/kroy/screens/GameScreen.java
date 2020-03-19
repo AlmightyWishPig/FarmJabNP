@@ -28,6 +28,8 @@ import com.dicycat.kroy.scenes.HUD;
 import com.dicycat.kroy.scenes.OptionsWindow;
 import com.dicycat.kroy.scenes.PauseWindow;
 
+import static com.badlogic.gdx.Gdx.graphics;
+
 
 /**
  * Contains the main game logic
@@ -268,7 +270,7 @@ public class GameScreen implements Screen{
 	private void updateLoop() {
 		List<GameObject> toRemove = new ArrayList<>();
 		for (GameObject gObject : gameObjects) {	//Go through every game object
-			gObject.update();						//Update the game object
+			gObject.update(Gdx.graphics.getDeltaTime());						//Update the game object
 			if (gObject.isRemove()) {				//Check if game object is to be removed
 				toRemove.add(gObject);					//Set it to be removed
 			}else {

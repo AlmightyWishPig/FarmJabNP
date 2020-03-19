@@ -26,7 +26,7 @@ public abstract class GameObject {
 	 * Called every frame.
 	 * Update the game object.
 	 */
-	public abstract void update();
+	public abstract void update(float delta);
 
 	/**
 	 * Render the object.

@@ -37,7 +37,7 @@ public abstract class Entity extends GameObject{
 	 * Method is called every frame (If added to the GameObjects list in GameScreen)
 	 */
 	@Override
-	public void update() {}	//Called every frame
+	public void update(float delta){}; //Called every frame
 
 	/**
 	 * Checks if the Entity still has health and is not marked for removal

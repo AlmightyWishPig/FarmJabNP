@@ -37,7 +37,7 @@ public class FireStation extends Entity {
 	 *
 	 * Added by Lucy Ivatt - NP STUDIOS
 	 */
-	public void update(){
+	public void update(float delta){
 		if(playerInRadius()){
 			Kroy.mainGameScreen.getPlayer().repairTruck();
 			if (!Kroy.mainGameScreen.getPlayer().isFull()) {

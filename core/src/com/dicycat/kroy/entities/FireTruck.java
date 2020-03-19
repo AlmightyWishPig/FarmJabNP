@@ -134,7 +134,7 @@ public class FireTruck extends Entity{
 	 * Updates the direction in which the firetruck is moving in as well as rendering it, moves it and
 	 * its hitbox and checks if any entity is inside its range.
 	 */
-	public void update(){
+	public void update(float delta){
 		// TRUCK_SELECT_CHANGE_7 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 		// Only allows the truck to move, control the camera and attack if selected
 		if (selected) {
@@ -184,6 +184,7 @@ public class FireTruck extends Entity{
 		healthBar.setPosition(getCentre().add(0,25));
 		healthBar.setBarDisplay((healthPoints*50)/maxHealthPoints);
 
+		removePowerUps(delta);
 	}
 	
 
@@ -336,6 +337,25 @@ public class FireTruck extends Entity{
 				this.hasShield = true;
 				this.shieldTimer = 0;
 			case "refill": this.refillWater();
+		}
+	}
+
+	private void removePowerUps(float delta){
+		if (this.hasSpeed) {
+			this.speedTimer += delta;
+			if (this.speedTimer > 10) {
+				this.hasSpeed = false;
+			}
+		}if (this.hasDamage) {
+			this.damageTimer += delta;
+			if (this.damageTimer > 10) {
+				this.hasDamage = false;
+			}
+		}if (this.hasShield) {
+			this.shieldTimer += delta;
+			if (this.shieldTimer > 10) {
+				this.hasShield = false;
+			}
 		}
 	}
 }

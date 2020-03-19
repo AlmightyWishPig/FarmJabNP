@@ -74,7 +74,7 @@ public class Bullet extends GameObject {
 	 *
 	 */
 	@Override
-	public void update() {
+	public void update(float delta) {
 		Vector2 posChange = velocity.cpy().scl(Gdx.graphics.getDeltaTime());	//Calculate distance to move
 		travelDist -= posChange.len();
 		if (travelDist <= 0) {	//Remove if travelled required distance

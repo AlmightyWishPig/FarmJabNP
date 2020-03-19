@@ -33,7 +33,7 @@ public class StatBar extends GameObject{
 		sprite.setScale(x,height);
 	}
 
-	public void update() {}
+	public void update(float delta) {}
 
 	public int getStatBarHeight() {
 		return height;

@@ -67,7 +67,7 @@ public class Alien extends Entity {
 	 * If a player is in range, shoots projectiles at the player.
 	 */
 	@Override
-	public void update() {
+	public void update(float delta) {
 		movementCountdown -= 1; // Decrements movement Countdown
 
 		// If the countdown is over, the moves the alien.
