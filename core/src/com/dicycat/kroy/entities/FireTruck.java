@@ -3,15 +3,10 @@ package com.dicycat.kroy.entities;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.dicycat.kroy.GameObject;
 import com.dicycat.kroy.Kroy;
 import com.dicycat.kroy.misc.StatBar;
@@ -37,7 +32,6 @@ public class FireTruck extends Entity{
 	private Rectangle hitbox = new Rectangle(20, 45, 20, 20);
 
 	protected final HashMap<String,Integer> DIRECTIONS = new HashMap<String,Integer>(); // Dictionary to store the possible directions the truck can face based on a key code created later
-	protected final int[] ARROWKEYS = {Keys.UP, Keys.DOWN, Keys.RIGHT, Keys.LEFT}; // List of the arrow keys to be able to iterate through them later on
 	protected Integer direction = 0; // Direction the truck is facing
 
 	private WaterStream water;
@@ -112,23 +106,27 @@ public class FireTruck extends Entity{
 	 * @return Direction to follow
 	 */
 	public Integer updateDirection() { 
-			String directionKey = ""; 
-			String[] directionKeys = {"n", "s", "e", "w"}; // alphabet of directionKey
+			String directionKey = "";
 
-			for (int i = 0; i <= 3; i++) {// loops through the 4 arrow keys (Stored as KEYS above)
-				if (Gdx.input.isKeyPressed(ARROWKEYS[i])) {
-					directionKey+=directionKeys[i];
-				}
-			}
+		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+			directionKey = "n";
+		}if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+			directionKey += "s";
+		}if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+			directionKey += "e";
+		}if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+			directionKey += "w";
+		}
 
-			if (directionKey.contains("ns")) {// makes sure direction doesn't change if both up and down are pressed
-				directionKey = directionKey.substring(2);
-			}
-			if (directionKey.contains("ew")) {// makes sure direction doesn't change if both left and right are pressed
-				directionKey = directionKey.substring(0, directionKey.length()-2);
-			}
 
-			return DIRECTIONS.get(directionKey);
+		if (directionKey.contains("ns")) {// makes sure direction doesn't change if both up and down are pressed
+			directionKey = directionKey.substring(2);
+		}
+		if (directionKey.contains("ew")) {// makes sure direction doesn't change if both left and right are pressed
+			directionKey = directionKey.substring(0, directionKey.length()-2);
+		}
+
+		return DIRECTIONS.get(directionKey);
 	}
 
 	/**
@@ -139,10 +137,10 @@ public class FireTruck extends Entity{
 		// TRUCK_SELECT_CHANGE_7 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 		// Only allows the truck to move, control the camera and attack if selected
 		if (selected) {
-			if (Gdx.input.isKeyPressed(ARROWKEYS[0]) ||
-					Gdx.input.isKeyPressed(ARROWKEYS[1]) ||
-					Gdx.input.isKeyPressed(ARROWKEYS[2]) ||
-					Gdx.input.isKeyPressed(ARROWKEYS[3])) { // Runs movement code if any arrow key pressed
+			if (Gdx.input.isKeyPressed(Input.Keys.W) ||
+					Gdx.input.isKeyPressed(Input.Keys.A) ||
+					Gdx.input.isKeyPressed(Input.Keys.S) ||
+					Gdx.input.isKeyPressed(Input.Keys.D)) { // Runs movement code if any arrow key pressed
 
 				direction = updateDirection(); // updates direction based on current keyboard input
 				moveInDirection(); // moves in the direction previously specified
