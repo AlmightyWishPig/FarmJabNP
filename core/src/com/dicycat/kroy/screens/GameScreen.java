@@ -70,7 +70,7 @@ public class GameScreen implements Screen{
 	// Slightly edited trucks statistics to make the game more balanced.
 	private Float[][] truckStats = {	//Each list is a configuration of a specific truck. {speed, flowRate, capacity, range}
 			{450f, 1f, 400f, 300f},		//Speed
-			{300f, 2f, 400f, 300f},	//Flow rate
+			{300f, 2f, 400f, 300f},	    //Flow rate
 			{300f, 1f, 500f, 300f},		//Capacity
 			{300f, 1f, 400f, 450f}		//Range
 		};
@@ -85,8 +85,7 @@ public class GameScreen implements Screen{
 	private int fortressesCount;
 	private Vector2 spawnPosition;	//Coordinates the player spawns at
 	
-	private List<GameObject> gameObjects, deadObjects;	//List of active game objects
-	private List<GameObject> objectsToRender = new ArrayList<>(); // List of game objects that have been updated but need rendering
+	private List<GameObject> gameObjects;	//List of active game objects
 	private List<GameObject> objectsToAdd;
 	private List<DebugDraw> debugObjects; //List of debug items
 
@@ -125,7 +124,6 @@ public class GameScreen implements Screen{
 	public void show() {
 		objectsToAdd = new ArrayList<>();
 		gameObjects = new ArrayList<>();
-		deadObjects = new ArrayList<>();
 		debugObjects = new ArrayList<>();
 
 		// TRUCK_SELECT_CHANGE_13 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
@@ -173,6 +171,15 @@ public class GameScreen implements Screen{
 		gameObjects.add(new Fortress(new Vector2(600,4000), textures.getFortress(5), textures.getDeadFortress(5),
 				new Vector2(300, 270), 900, 30)); //45, 166
 		// FORTRESS_HEALTH_1 & NEW_FORTRESSES_2 - END OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE  & ALASDAIR PILMORE-BEDFORD
+
+		//ASSESSMENT 4 START
+		gameObjects.add(new Powerups(new Vector2(4198,3798))); //Co-ords are in the form (x*16 - 3,(399-y)*16 - 2) where (x,y) is from Tiled
+		gameObjects.add(new Powerups(new Vector2(901,4726)));  //
+		gameObjects.add(new Powerups(new Vector2(4085,5510))); //
+		gameObjects.add(new Powerups(new Vector2(3334,2630))); //
+		gameObjects.add(new Powerups(new Vector2(6629,2518))); //
+		gameObjects.add(new Powerups(new Vector2(1478,2022))); //
+		gameObjects.add(new Powerups(new Vector2(5461,1286))); //
 	}
 
 	/**
@@ -209,8 +216,6 @@ public class GameScreen implements Screen{
 
 				gameTimer -= delta;		//Decrement timer
 
-				updateLoop(); //Update all game objects positions but does not render them as to be able to render everything as quickly as possible
-
 				gameMap.renderRoads(gamecam); // Render the background roads, fields and rivers
 
 				game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -219,7 +224,7 @@ public class GameScreen implements Screen{
 
 				hud.update(delta);
 
-				renderObjects(); // Renders objects specified in the UpdateLoop() called previously
+				updateLoop(); // Renders and updates objects
 
 				game.batch.end();
 
@@ -274,13 +279,20 @@ public class GameScreen implements Screen{
 			if (gObject.isRemove()) {				//Check if game object is to be removed
 				toRemove.add(gObject);					//Set it to be removed
 			}else {
-				objectsToRender.add(gObject);
+				//ASSESSMENT 4 START
+				if (gObject instanceof Powerups && ((Powerups) gObject).getExists()){ //checks if the powerup is active preventing
+					gObject.render(game.batch);										//inactive powerups from being rendered
+				}else {
+					gObject.render(game.batch);										//Objects are now renderderred int his loop rather
+																					//than being added to a list and then rendered
+				}
+				//ASSESSMENT 4 END
 			}
 		}
 		for (GameObject rObject : toRemove) {	//Remove game objects set for removal
 			gameObjects.remove(rObject);
 			if (rObject.isDisplayable()) {
-				deadObjects.add(rObject);
+				rObject.render(game.batch);
 			}
 		}
 		//Add game objects to be added
@@ -288,8 +300,6 @@ public class GameScreen implements Screen{
 
 		objectsToAdd.clear();	// Clears list as not to add new objects twice
 
-		// loops through the destroyed but displayed items (such as destroyed bases)
-		objectsToRender.addAll(deadObjects);
 		// TRUCK_SELECT_CHANGE_15 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 		// Changed to check if the active truck is destroyed and then updates lives if so
 		if (players.get(activeTruck).isRemove()) {	//If the player is set for removal, respawn
@@ -299,15 +309,7 @@ public class GameScreen implements Screen{
 
 	}
 
-	/**
-	 * Renders the objects in "objectsToRender" then clears the list
-	 */
-	private void renderObjects() {
-		for (GameObject object : objectsToRender) {
-			object.render(game.batch);
-		}
-		objectsToRender.clear();
-	}
+	//ASSESSMENT 4 Removed class renderObjects due to, has been reworked to render during the updateObjects loop
 
 	/**
 	 * Add a game object next frame

@@ -1,3 +1,4 @@
+//Assessment 4 START
 package com.dicycat.kroy.entities;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -12,8 +13,8 @@ public class Powerups extends Entity{
     private Boolean exists;
     private float timer;
     private int respawnTimer;
-    public Powerups(Vector2 Pos, Texture img){
-        super(Pos, img, new Vector2(8,8), 1, 8);
+    public Powerups(Vector2 Pos){
+        super(Pos,  new Texture("speed.png"), new Vector2(20,20), 1000000, 250);
         this.setType();
         this.setRespawnTimer();
         this.exists = true;
@@ -80,4 +81,9 @@ public class Powerups extends Entity{
             Kroy.mainGameScreen.getPlayer().powerup(type);
         }
     }
+
+    public boolean getExists(){
+        return this.exists;
+    }
 }
+//Assessment 4 END

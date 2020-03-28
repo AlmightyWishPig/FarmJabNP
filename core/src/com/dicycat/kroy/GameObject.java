@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class GameObject {
 	protected Sprite sprite;						//Sprite of the object
 	protected Boolean remove, displayable;			//Should this GameObject be removed? Should this item be displayed?
-	protected float rotation = 0;	//Current angle the truck is facing in degrees
+	private float rotation = 0;	//Current angle the truck is facing in degrees
 
 	public GameObject(Vector2 spawnPos, Texture image, Vector2 imSize) {	//Constructor; takes the screen to be put on, spawn position vector, image and a vector for its size
 		sprite = new Sprite(image,(int) spawnPos.x ,(int) spawnPos.y ,(int) imSize.x,(int) imSize.y); // sprite class stores the texture position and size of the object
@@ -62,6 +62,16 @@ public abstract class GameObject {
 	public Sprite getSprite() { return sprite; }
 	public Vector2 getPosition() { return new Vector2(getX(), getY());  }
 	public boolean isDisplayable() { return displayable; }
+
+
+	//ASSESSMENT 4 START
+	/**
+	 * Allows changing the sprite for gameObjects
+	 */
+	public void setSprite(Vector2 spawnPos, Texture image, Vector2 imSize) {
+		sprite = new Sprite(image,(int) spawnPos.x ,(int) spawnPos.y ,(int) imSize.x,(int) imSize.y);
+	}
+	//ASSESSMENT 4 END
 
 	/**
 	 * Return centre of GameObject

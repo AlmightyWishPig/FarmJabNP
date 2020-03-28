@@ -78,7 +78,7 @@ public class FireTruck extends Entity{
 	/**
 	 * This method moves the truck in the direction calculated in updateDirection()
 	 */
-	public void moveInDirection() {
+	private void moveInDirection() {
 
 		Vector2 movement = new Vector2(1,0); // movement represents where the truck is moving to. Initially set to (1,0) as this represents a unit vector
 
@@ -106,7 +106,7 @@ public class FireTruck extends Entity{
 	 * Method checks if any arrow keys currently pressed and then converts them into a integer direction
 	 * @return Direction to follow
 	 */
-	public Integer updateDirection() { 
+	private Integer updateDirection() {
 			String directionKey = "";
 
 		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
