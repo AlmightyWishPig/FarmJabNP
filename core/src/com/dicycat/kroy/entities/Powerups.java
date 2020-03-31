@@ -26,7 +26,7 @@ public class Powerups extends Entity{
     private Boolean collision () {
         if (playerInRadius()) {
             this.exists = false;
-            super.setSprite(pos, new Texture("speed.png"), new Vector2(20,20));
+            this.setTexture(new Texture ("blank.png"));
             this.timer = 0;
             return true;
         } else {
@@ -42,15 +42,19 @@ public class Powerups extends Entity{
         switch(typeNumber){
             case 0:
                 this.type = "speed";
+                this.setTexture(new Texture("speed.png"));
                 break;
             case 1:
                 this.type = "damage";
+                this.setTexture(new Texture("damage.png"));
                 break;
             case 2:
                 this.type = "shield";
+                this.setTexture(new Texture("shield.png"));
                 break;
             case 3:
                 this.type = "refill";
+                this.setTexture(new Texture("refill.png"));
                 break;
         }
     }
@@ -70,7 +74,7 @@ public class Powerups extends Entity{
     //Sets the amount of time between collection and respawning
     private void setRespawnTimer(){
         Random r = new Random();
-        this.respawnTimer = r.nextInt(10) + 27;
+        this.respawnTimer = r.nextInt(10) + 15;
     }
 
 
@@ -84,7 +88,7 @@ public class Powerups extends Entity{
     //Call this function
     public void update(float delta) {
         this.checkspawn(delta);
-        if (this.collision()) {
+        if (this.collision() && this.exists) {
             Kroy.mainGameScreen.getPlayer().powerup(type);
         }
     }

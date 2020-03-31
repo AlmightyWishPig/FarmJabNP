@@ -37,7 +37,7 @@ public abstract class Entity extends GameObject{
 	 * Method is called every frame (If added to the GameObjects list in GameScreen)
 	 */
 	@Override
-	public void update(float delta){}; //Called every frame
+	public void update(float delta){} //Called every frame
 
 	/**
 	 * Checks if the Entity still has health and is not marked for removal
@@ -55,12 +55,9 @@ public abstract class Entity extends GameObject{
 		if (damage < 0){
 			throw new IllegalArgumentException("applyDamage(float damage) cannot be passed a negative float");
 		}
-		if (this instanceof FireTruck && !((FireTruck) this).getShield()){
 			healthPoints -= damage;
-		}
-		healthPoints -= damage;
-		if (healthPoints <= 0) {
-			die();
+			if (healthPoints <= 0) {
+				die();
 		}
 	}
 
@@ -76,4 +73,5 @@ public abstract class Entity extends GameObject{
 	public int getHealthPoints(){
 		return healthPoints;
 	}
+
 }

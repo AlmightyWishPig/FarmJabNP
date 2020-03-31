@@ -67,9 +67,10 @@ public abstract class GameObject {
 	//ASSESSMENT 4 START
 	/**
 	 * Allows changing the sprite for gameObjects
+	 * @param image the texture to change to
 	 */
-	public void setSprite(Vector2 spawnPos, Texture image, Vector2 imSize) {
-		sprite = new Sprite(image,(int) spawnPos.x ,(int) spawnPos.y ,(int) imSize.x,(int) imSize.y);
+	public void setTexture(Texture image) {
+		sprite.setTexture(image);
 	}
 	//ASSESSMENT 4 END
 

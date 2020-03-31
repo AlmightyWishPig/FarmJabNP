@@ -1,16 +1,13 @@
 package com.dicycat.kroy.screens;
   
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -67,7 +64,7 @@ public class MenuScreen implements Screen{
   public static Music music = Gdx.audio.newMusic(Gdx.files.internal("gamemusic.mp3"));
   //ASSESSMENT 4 START
 	//reduced music volume
-  public static float musicVolume = 0.3f;
+  public static float musicVolume = 0;
   //ASSESSMENT 4 END
 
   //coordinates for Play and Exit buttons 
@@ -134,7 +131,7 @@ public class MenuScreen implements Screen{
 	  
 	  music.play();
 	  music.setLooping(true);  
-	  music.setVolume((float)musicVolume);  
+	  music.setVolume(musicVolume);
 	  
 	  optionsWindow = new OptionsWindow(game);
 	  optionsWindow.visibility(false);

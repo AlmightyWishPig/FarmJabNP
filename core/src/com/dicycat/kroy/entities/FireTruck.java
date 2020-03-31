@@ -37,7 +37,7 @@ public class FireTruck extends Entity{
 	private WaterStream water;
 	private StatBar tank;
 	private StatBar healthBar;
-	private boolean firing, hasSpeed, hasDamage, hasShield; //Booleans to track what powerups the truck has active
+	private boolean firing, hasSpeed, hasDamage, hasShield = true; //Booleans to track what powerups the truck has active
 	private float speedTimer, damageTimer, shieldTimer; //Timers to track when powerups needs to be removed
 	private float range;
 
@@ -324,25 +324,37 @@ public class FireTruck extends Entity{
 
 	//ASSESSMENT 4 START
 
-	public boolean getShield(){return this.hasShield;}
-
+	/**
+	 * Applies powerup if they are not already applied, if they are then resets the timer
+	 * @param type the type of powerup
+	 **/
 	void powerup(String type) {
 		switch (type) {
 			case "speed":
 				this.speed += this.speed * 0.3;
 				this.hasSpeed = true;
 				this.speedTimer = 0;
+				break;
 			case "damage":
 				this.flowRate += this.flowRate * 0.3;
 				this.hasDamage = true;
 				this.damageTimer = 0;
+				break;
 			case "shield":
 				this.hasShield = true;
 				this.shieldTimer = 0;
-			case "refill": this.refillWater();
+				break;
+			case "refill":
+				this.refillWater();
+				this.healthPoints = this.maxHealthPoints;
+				break;
 		}
 	}
 
+	/**
+	 * Removes powerups once they have worn off
+	 * @param delta the time passed since the last frame
+	 **/
 	private void removePowerUps(float delta){
 		if (this.hasSpeed) {
 			this.speedTimer += delta;
@@ -354,6 +366,7 @@ public class FireTruck extends Entity{
 			this.damageTimer += delta;
 			if (this.damageTimer > 5) {
 				this.hasDamage = false;
+				this.flowRate = (float)(this.flowRate / 1.3);
 			}
 		}if (this.hasShield) {
 			this.shieldTimer += delta;
@@ -361,6 +374,22 @@ public class FireTruck extends Entity{
 				this.hasShield = false;
 			}
 		}
+	}
+
+	/**
+	 * Apply x amount of damage to the FireTruck if it does not have a shield
+	 * @param damage Amount of damage to inflict on the Entity
+	 **/
+	@Override
+	public void applyDamage(float damage) {
+		if (damage < 0){
+			throw new IllegalArgumentException("applyDamage(float damage) cannot be passed a negative float");
+		}
+		if (!this.hasShield){
+		healthPoints -= damage;
+		if (healthPoints <= 0) {
+			die();
+		}}
 	}
 	//ASSESSMENT 4 END
 }
