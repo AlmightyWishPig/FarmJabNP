@@ -13,8 +13,10 @@ public class Powerups extends Entity{
     private Boolean exists;
     private float timer;
     private int respawnTimer;
-    public Powerups(Vector2 Pos){
-        super(Pos,  new Texture("speed.png"), new Vector2(20,20), 1000000, 250);
+    private Vector2 pos;
+    public Powerups(Vector2 pos){
+        super(pos,  new Texture("speed.png"), new Vector2(20,20), 1000000, 25);
+        this.pos = pos;
         this.setType();
         this.setRespawnTimer();
         this.exists = true;
@@ -24,6 +26,7 @@ public class Powerups extends Entity{
     private Boolean collision () {
         if (playerInRadius()) {
             this.exists = false;
+            super.setSprite(pos, new Texture("speed.png"), new Vector2(20,20));
             this.timer = 0;
             return true;
         } else {
@@ -39,12 +42,16 @@ public class Powerups extends Entity{
         switch(typeNumber){
             case 0:
                 this.type = "speed";
+                break;
             case 1:
                 this.type = "damage";
+                break;
             case 2:
                 this.type = "shield";
+                break;
             case 3:
                 this.type = "refill";
+                break;
         }
     }
 

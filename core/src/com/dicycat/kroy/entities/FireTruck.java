@@ -109,6 +109,8 @@ public class FireTruck extends Entity{
 	private Integer updateDirection() {
 			String directionKey = "";
 
+		//ASSESSMENT 4 START
+		//Simplified direction controls checking and changed movement to WASD keys
 		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 			directionKey = "n";
 		}if (Gdx.input.isKeyPressed(Input.Keys.S)) {
@@ -119,6 +121,7 @@ public class FireTruck extends Entity{
 			directionKey += "w";
 		}
 
+		//ASSESSMENT 4 END
 
 		if (directionKey.contains("ns")) {// makes sure direction doesn't change if both up and down are pressed
 			directionKey = directionKey.substring(2);
@@ -216,8 +219,7 @@ public class FireTruck extends Entity{
 	}
 
 	/**
-	 * Returns an array of all enemy GameObjects in range
-	 * @return
+	 * @return an array of all enemy GameObjects in range
 	 */
 	private ArrayList<GameObject> entitiesInRange(){
 		ArrayList<GameObject> outputArray = new ArrayList<GameObject>();	//create array list to output enemies in range
@@ -240,11 +242,7 @@ public class FireTruck extends Entity{
 	 * @return true if full, false if not
 	 */
 	public boolean isFull(){
-		if (this.maxWater == this.currentWater){
-			return true;
-		}else {
-			return false;
-		}
+		return this.maxWater == this.currentWater;
 	}
 
 	/**
@@ -323,14 +321,19 @@ public class FireTruck extends Entity{
 	}
 	// TRUCK_SELECT_CHANGE_8 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 
-	public void powerup(String type) {
+
+	//ASSESSMENT 4 START
+
+	public boolean getShield(){return this.hasShield;}
+
+	void powerup(String type) {
 		switch (type) {
 			case "speed":
-				this.speed += this.speed * 0.1;
+				this.speed += this.speed * 0.3;
 				this.hasSpeed = true;
 				this.speedTimer = 0;
 			case "damage":
-				this.flowRate += this.flowRate * 0.1;
+				this.flowRate += this.flowRate * 0.3;
 				this.hasDamage = true;
 				this.damageTimer = 0;
 			case "shield":
@@ -343,19 +346,21 @@ public class FireTruck extends Entity{
 	private void removePowerUps(float delta){
 		if (this.hasSpeed) {
 			this.speedTimer += delta;
-			if (this.speedTimer > 10) {
+			if (this.speedTimer > 5) {
 				this.hasSpeed = false;
+				this.speed = (float)(this.speed / 1.3);
 			}
 		}if (this.hasDamage) {
 			this.damageTimer += delta;
-			if (this.damageTimer > 10) {
+			if (this.damageTimer > 5) {
 				this.hasDamage = false;
 			}
 		}if (this.hasShield) {
 			this.shieldTimer += delta;
-			if (this.shieldTimer > 10) {
+			if (this.shieldTimer > 5) {
 				this.hasShield = false;
 			}
 		}
 	}
+	//ASSESSMENT 4 END
 }

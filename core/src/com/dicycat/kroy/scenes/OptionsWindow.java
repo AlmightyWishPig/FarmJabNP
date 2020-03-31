@@ -42,10 +42,10 @@ public class OptionsWindow {
     //music options page
     private TextButton stopMusic = new TextButton("STOP MUSIC", skin);
     private TextButton playMusic = new TextButton("PLAY MUSIC", skin);
-    private TextButton volumeDown = new TextButton("MUTE VOLUME", skin);
-    private TextButton volumeUp = new TextButton("UNMUTE VOLUME", skin);
+	//ASSESSMENT 4 START
+	//Removed redundant buttons
+	//ASSESSMENT 4 END
     private TextButton backFromMusic = new TextButton("BACK", skin);
-    
     //debug options page
     private TextButton showDebug = new TextButton("SHOW DEBUG", skin);
     private TextButton hideDebug = new TextButton("HIDE DEBUG", skin);
@@ -147,23 +147,11 @@ public class OptionsWindow {
 		    		} 
 		    		}
 		    });
-			//volumeDown button
-			this.volumeDown.addListener(new ClickListener() {
-		    	@Override
-		    	public void clicked(InputEvent event, float x, float y) {
-		    			MenuScreen.musicVolume = 0;
-		    			MenuScreen.music.setVolume((float)MenuScreen.musicVolume);
 
-		    	}
-		    });
-			//volumeUp button
-			this.volumeUp.addListener(new ClickListener() {
-		    	@Override
-		    	public void clicked(InputEvent event, float x, float y) {
-		    			MenuScreen.musicVolume = 1;
-		    			MenuScreen.music.setVolume((float)MenuScreen.musicVolume);
-		    	}
-		    });
+			//ASSESSMENT 4 START
+			//Removed redundant buttons
+			//ASSESSMENT 4 END
+
 			//backFromMusic button
 			this.backFromMusic.addListener(new ClickListener() {
 		    	@Override
@@ -174,12 +162,18 @@ public class OptionsWindow {
 		    	}
 		    });
 			
-	//debug page
+			//debug page
 			//showDebug button
 			this.showDebug.addListener(new ClickListener() {
 		    	@Override
 		    	public void clicked(InputEvent event, float x, float y) {
 		    		GameScreen.showDebug = true;
+		    		//ASSESSMENT 4 START
+					//Debug buttons now return to the previous page
+					table.reset();
+					state = State.PAGE1;
+					updateDraw();
+					//ASSESSMENT 4 END
 		    		}
 		    });
 			//hideDebug button
@@ -187,6 +181,12 @@ public class OptionsWindow {
 		    	@Override
 		    	public void clicked(InputEvent event, float x, float y) {
 		    		GameScreen.showDebug = false;
+					//ASSESSMENT 4 START
+					//Debug buttons now return to the previous page
+		    		table.reset();
+					state = State.PAGE1;
+					updateDraw();
+					//ASSESSMENT 4 END
 		    		}
 		    });
 			//backFromDebug button
@@ -225,10 +225,9 @@ public class OptionsWindow {
 			    table.row();
 			    table.add(stopMusic).width(Kroy.CentreWidth());
 			    table.row();
-			    table.add(volumeDown).width(Kroy.CentreWidth());
-			    table.row();
-			    table.add(volumeUp).width(Kroy.CentreWidth());
-			    table.row();
+				//ASSESSMENT 4 START
+				//Removed redundant buttons
+				//ASSESSMENT 4 END
 			    table.add(backFromMusic).width(Kroy.CentreWidth());
 			    break;
 			case DEBUG:

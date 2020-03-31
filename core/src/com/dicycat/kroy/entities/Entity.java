@@ -55,6 +55,9 @@ public abstract class Entity extends GameObject{
 		if (damage < 0){
 			throw new IllegalArgumentException("applyDamage(float damage) cannot be passed a negative float");
 		}
+		if (this instanceof FireTruck && !((FireTruck) this).getShield()){
+			healthPoints -= damage;
+		}
 		healthPoints -= damage;
 		if (healthPoints <= 0) {
 			die();
