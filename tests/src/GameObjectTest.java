@@ -141,12 +141,11 @@ public class GameObjectTest {
 
 class GameObjectTester extends GameObject {
 
-    public GameObjectTester(Vector2 spawnPos, Texture image, Vector2 imSize) {
+    GameObjectTester(Vector2 spawnPos, Texture image, Vector2 imSize) {
         super(spawnPos, image, imSize);
     }
 
     @Override
-    public void update() {
-
+    public void update(float delta) {
     }
 }
