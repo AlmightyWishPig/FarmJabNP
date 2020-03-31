@@ -31,8 +31,8 @@ public class FireTruck extends Entity{
 
 	private Rectangle hitbox = new Rectangle(20, 45, 20, 20);
 
-	protected final HashMap<String,Integer> DIRECTIONS = new HashMap<String,Integer>(); // Dictionary to store the possible directions the truck can face based on a key code created later
-	protected Integer direction = 0; // Direction the truck is facing
+	private final HashMap<String,Integer> DIRECTIONS = new HashMap<String,Integer>(); // Dictionary to store the possible directions the truck can face based on a key code created later
+	private Integer direction = 0; // Direction the truck is facing
 
 	private WaterStream water;
 	private StatBar tank;
@@ -222,7 +222,7 @@ public class FireTruck extends Entity{
 	 * @return an array of all enemy GameObjects in range
 	 */
 	private ArrayList<GameObject> entitiesInRange(){
-		ArrayList<GameObject> outputArray = new ArrayList<GameObject>();	//create array list to output enemies in range
+		ArrayList<GameObject> outputArray = new ArrayList<>();	//create array list to output enemies in range
 
 		for (GameObject currentObject : Kroy.mainGameScreen.getGameObjects()) {		//iterates through all game objects
 			// PATROLS_2 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT ------------
@@ -241,7 +241,7 @@ public class FireTruck extends Entity{
 	 * Checks if the firetrucks tank is full of water.
 	 * @return true if full, false if not
 	 */
-	public boolean isFull(){
+	boolean isFull(){
 		return this.maxWater == this.currentWater;
 	}
 
@@ -250,7 +250,7 @@ public class FireTruck extends Entity{
 	 * @param object Object to check
 	 * @return Is the object within range?
 	 */
-	public boolean objectInRange(GameObject object) {
+	private boolean objectInRange(GameObject object) {
 		return (Vector2.dst(object.getCentre().x, object.getCentre().y, getCentre().x, getCentre().y)<range);
 	}
 
@@ -277,7 +277,7 @@ public class FireTruck extends Entity{
 	 * Added by Lucy Ivatt - NP STUDIOS
 	 */
 	// REPLENISH_1: OVER TIME -> INSTANT  - START OF MODIFICATION - NP STUDIOS - BETHANY GILMORE -----------------------------------------
-	public void refillWater(){
+	void refillWater(){
 		this.currentWater = this.maxWater;
 	}
 	// END OF MODIFICATION  - NP STUDIOS -----------------------------------------
@@ -290,13 +290,16 @@ public class FireTruck extends Entity{
 	 * Added by Lucy Ivatt - NP STUDIOS
 	 */
 	// Separated refilling water and fixing truck into 2 seperate methods as refilling the truck is now linked to the minigame
-	public void repairTruck() {
+	void repairTruck() {
 		if(!(healthPoints >= maxHealthPoints)){
 			healthPoints += 2;
 		}
 	}
 	// REPLENISH_2: OVER TIME -> INSTANT  - END OF MODIFICATION - NP STUDIOS - LUCY IVATT -----------------------------------------
 
+
+	//ASSESSMENT 4 START
+	//Simplified calculation
 	/**
 	 * Checks finds the tile that the coordinate is a part of and checks if that tile is solid
 	 * @param pos the coordinate on the game map
@@ -304,15 +307,13 @@ public class FireTruck extends Entity{
 	 *
 	 * Added by Lucy Ivatt - NP STUDIOS
 	 */
-	public boolean isOnCollidableTile(Vector2 pos) {
-		if(GameScreen.gameMap.getTileTypeByLocation(0, pos.x, pos.y).isCollidable()
-				||GameScreen.gameMap.getTileTypeByLocation(0, pos.x + this.getWidth(), pos.y).isCollidable()
-				||GameScreen.gameMap.getTileTypeByLocation(0, pos.x, pos.y+this.getHeight()).isCollidable()
-				||GameScreen.gameMap.getTileTypeByLocation(0, pos.x+this.getWidth(), pos.y+this.getHeight()).isCollidable()) {
-			return true;
-		}
-		return false;
+	private boolean isOnCollidableTile(Vector2 pos) {
+		return GameScreen.gameMap.getTileTypeByLocation(0, pos.x, pos.y).isCollidable()
+				|| GameScreen.gameMap.getTileTypeByLocation(0, pos.x + this.getWidth(), pos.y).isCollidable()
+				|| GameScreen.gameMap.getTileTypeByLocation(0, pos.x, pos.y + this.getHeight()).isCollidable()
+				|| GameScreen.gameMap.getTileTypeByLocation(0, pos.x + this.getWidth(), pos.y + this.getHeight()).isCollidable();
 	}
+	//ASSESSMENT 4 START
 
 	// TRUCK_SELECT_CHANGE_8 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	// Added a setter for the selected boolean

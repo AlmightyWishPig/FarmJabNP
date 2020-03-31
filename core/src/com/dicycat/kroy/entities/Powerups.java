@@ -13,10 +13,8 @@ public class Powerups extends Entity{
     private Boolean exists;
     private float timer;
     private int respawnTimer;
-    private Vector2 pos;
     public Powerups(Vector2 pos){
         super(pos,  new Texture("speed.png"), new Vector2(20,20), 1000000, 25);
-        this.pos = pos;
         this.setType();
         this.setRespawnTimer();
         this.exists = true;
