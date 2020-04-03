@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="GameObjectTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2020-04-02T20:46:45" hostname="DESKTOP-A6TT8M4" time="0.158">
+  <properties/>
+  <testcase name="setPositionShouldChangeGameObjectsPositionStandard" classname="GameObjectTest" time="0.022"/>
+  <testcase name="changePositionShouldShiftStandardVector" classname="GameObjectTest" time="0.001"/>
+  <testcase name="getCentreShouldReturnCentreWithZerosAsPosition" classname="GameObjectTest" time="0.001"/>
+  <testcase name="getCentreShouldReturnCentreWithZeroSize" classname="GameObjectTest" time="0.002"/>
+  <testcase name="changePositionShouldShiftWithNegativeVector" classname="GameObjectTest" time="0.001"/>
+  <testcase name="initGameObjectShouldInstantiateCorrectly" classname="GameObjectTest" time="0.001"/>
+  <testcase name="getCentreShouldReturnCentreAtStandardPosition" classname="GameObjectTest" time="0.002"/>
+  <testcase name="setPositionShouldSetToNegativePosition" classname="GameObjectTest" time="0.001"/>
+  <testcase name="changePositionShouldShiftWithOneNegativeNumberVector" classname="GameObjectTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
