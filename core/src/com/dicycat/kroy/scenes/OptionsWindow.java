@@ -27,7 +27,7 @@ import com.dicycat.kroy.screens.MenuScreen;
 public class OptionsWindow {
 	
 	public Stage stage;
-	public Table table = new Table();
+	private Table table = new Table();
 	private SpriteBatch sb;
 	private NinePatch patch = new NinePatch(new Texture("loool.jpg"), 3, 3, 3, 3);
 	private NinePatchDrawable background = new NinePatchDrawable(patch);
@@ -51,7 +51,7 @@ public class OptionsWindow {
     private TextButton hideDebug = new TextButton("HIDE DEBUG", skin);
     private TextButton backFromDebug = new TextButton("BACK", skin);
     
-    public static State state = State.PAGE1;
+    private static State state = State.PAGE1;
     
     /**
      *	Allows to have multiple 'pages' of the Option window without
@@ -67,7 +67,7 @@ public class OptionsWindow {
 	 * 	The important feature is the updateDraw() method
 	 * 	which can be found at the bottom.
 	 * 
-	 * @param game
+	 * @param game The instance of the game currently running
 	 */
 	public OptionsWindow(Kroy game) {
 		sb = game.batch;
@@ -118,12 +118,10 @@ public class OptionsWindow {
 		    	@Override
 		    	public void clicked(InputEvent event, float x, float y) {
 		    		visibility(false);
-		    		if (fromMenu == false) {
+		    		if (!fromMenu) {
 		    			Kroy.mainGameScreen.setGameState(GameScreen.GameScreenState.PAUSE);
-		    			return;
-		    		} else if (fromMenu) {
+		    		} else{
 		    			Kroy.mainMenuScreen.state = MenuScreen.MenuScreenState.MAINMENU;
-		    			return;
 		    		}
 		    	}
 		    });
@@ -133,7 +131,7 @@ public class OptionsWindow {
 			this.playMusic.addListener(new ClickListener() {
 		    	@Override
 		    	public void clicked(InputEvent event, float x, float y) {
-		    		if (MenuScreen.music.isPlaying() == false) {
+		    		if (!MenuScreen.music.isPlaying()) {
 		    			MenuScreen.music.play();  
 		    		}
 		    		}
@@ -226,7 +224,7 @@ public class OptionsWindow {
 			    table.add(stopMusic).width(Kroy.CentreWidth());
 			    table.row();
 				//ASSESSMENT 4 START
-				//Removed redundant buttons
+				//Removed redundant buttons mute and unmute volume
 				//ASSESSMENT 4 END
 			    table.add(backFromMusic).width(Kroy.CentreWidth());
 			    break;
