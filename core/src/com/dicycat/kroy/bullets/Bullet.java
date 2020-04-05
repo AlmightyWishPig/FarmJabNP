@@ -44,7 +44,10 @@ public class Bullet extends GameObject {
 		// FORTRESS_HEALTH_6 - END OF MODIFICATION - NP STUDIOS
 		this.speed = speed;
 		changeDirection(direction);
-		maxDist = range;
+		//ASSESSMENT 4 START
+		maxDist = (float) (range * (difficulty * 0.2 + 0.6)); //Reduced range on bullets when in easier modes
+		//ASSESSMENT 4 END
+
 		hitbox = new Circle(spawnPos.x, spawnPos.y, 10);
 	}
 
@@ -60,11 +63,13 @@ public class Bullet extends GameObject {
 	}
 
 	/**
-	 * Calculate velocity of the bullet (Translation per frame)
+	 * Calculate velocity of the bullet (Translation per frame) modified by difficulty
 	 * @param newDir New direction of the bullet
 	 */
 	void changeDirection(Vector2 newDir) {
-		velocity = newDir.scl(speed);
+		//ASSESSMENT 4 START
+		velocity = newDir.scl((float)(speed * (difficulty * 0.2 + 0.6))); //Added difficulty into this calculation so bullets travel faster at higher difficulties
+		//ASSESSMENT 4 END
 	}
 
 	/**

@@ -2,6 +2,8 @@ package com.dicycat.kroy.bullets;
 
 import com.badlogic.gdx.math.Vector2;
 
+import static com.dicycat.kroy.scenes.FireTruckSelectionScene.difficulty;
+
 /**
  * Stores patterns of bullets to fire
  * 
@@ -30,7 +32,10 @@ public class Pattern {
 	public Pattern(int degree, int speed, int range, float timeBetweenShots, int patternLength, int multi, float cooldown, int damage) {
 		this.patternDamage = damage;
 		aim = true;
-		waitTime = timeBetweenShots;
+		//ASSESSMENT 4 START
+		//Shots are more spaced on lower difficulties
+		waitTime = (float)(timeBetweenShots * 1/(difficulty * 0.5 ));
+		//ASSESSMENT 4 END
 		bullets = new Bullet[patternLength][multi];
 		this.cooldown = cooldown;
 		offset = (multi - (multi % 2)) / 2;
@@ -62,7 +67,10 @@ public class Pattern {
 	public Pattern(int speed, int range, float timeBetweenShots, int patternLength, int multi, float cooldown, int damage) {
 		this.patternDamage = damage;
 		this.aim = true;
-		waitTime = timeBetweenShots;
+		//ASSESSMENT 4 START
+		//Shots are more spaced on lower difficulties
+		waitTime = (float)(timeBetweenShots * 1/(difficulty * 0.5));
+		//ASSESSMENT 4 END
 		bullets = new Bullet[patternLength][multi];
 		this.cooldown = cooldown;
 		offset = (multi - (multi % 2)) / 2;
@@ -94,7 +102,10 @@ public class Pattern {
 		this.patternDamage = damage;
 	// FORTRESS_HEALTH_4 - END OF MODIFICATION - NP STUDIOS
 		aim = false;
-		waitTime = timeBetweenShots;
+		//ASSESSMENT 4 START
+		//Shots are more spaced on lower difficulties
+		waitTime = (float)(timeBetweenShots * 1/(difficulty * 0.5));
+		//ASSESSMENT 4 END
 		int patternLength = rotations * 36;
 		bullets = new Bullet[patternLength][multi];
 		this.cooldown = cooldown;

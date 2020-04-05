@@ -57,9 +57,7 @@ public abstract class Entity extends GameObject{
 		if (damage < 0){
 			throw new IllegalArgumentException("applyDamage(float damage) cannot be passed a negative float");
 		} else {
-			//ASSESSMENT 4 START
-			healthPoints -= damage * (4 - difficulty) * 0.5; //Damage dealt to aliens is modified by difficulty
-			//ASSESSMENT 4 END
+			healthPoints -= damage;
 			if (healthPoints <= 0) {
 				die();
 			}
