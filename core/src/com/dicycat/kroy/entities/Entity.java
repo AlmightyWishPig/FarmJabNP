@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.GameObject;
 import com.dicycat.kroy.Kroy;
 
+import static com.dicycat.kroy.scenes.FireTruckSelectionScene.difficulty;
+
 /**
  * Class for interactive gameObjects
  * 
@@ -54,10 +56,13 @@ public abstract class Entity extends GameObject{
 	public void applyDamage(float damage) {
 		if (damage < 0){
 			throw new IllegalArgumentException("applyDamage(float damage) cannot be passed a negative float");
-		}
-			healthPoints -= damage;
+		} else {
+			//ASSESSMENT 4 START
+			healthPoints -= damage * (4 - difficulty) * 0.5; //Damage dealt to aliens is modified by difficulty
+			//ASSESSMENT 4 END
 			if (healthPoints <= 0) {
 				die();
+			}
 		}
 	}
 

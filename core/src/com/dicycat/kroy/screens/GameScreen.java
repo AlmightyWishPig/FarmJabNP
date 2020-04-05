@@ -61,7 +61,12 @@ public class GameScreen implements Screen{
 	
 	private OrthographicCamera gamecam;	//follows along what the port displays
 	private Viewport gameport;
-	
+
+	//ASSESSMENT 4 START
+	//Reworked the rendering system, this is now only used to render "removed" objects
+	List<GameObject> toRender = new ArrayList<>(); //Allows removed objects to be rendered
+	//ASSESSMENT 4 END
+
 	private HUD hud;
 	private PauseWindow pauseWindow;
 	private Minigame minigame;
@@ -278,23 +283,25 @@ public class GameScreen implements Screen{
 			gObject.update(Gdx.graphics.getDeltaTime());						//Update the game object
 			if (gObject.isRemove()) {				//Check if game object is to be removed
 				toRemove.add(gObject);					//Set it to be removed
+			}	//ASSESSMENT 4 START
+			if (gObject instanceof Powerups && ((Powerups) gObject).getExists()){ //checks if the powerup is active preventing
+				gObject.render(game.batch);										//inactive powerups from being rendered
 			}else {
-				//ASSESSMENT 4 START
-				if (gObject instanceof Powerups && ((Powerups) gObject).getExists()){ //checks if the powerup is active preventing
-					gObject.render(game.batch);										//inactive powerups from being rendered
-				}else {
-					gObject.render(game.batch);										//Objects are now renderderred int his loop rather
-																					//than being added to a list and then rendered
-				}
-				//ASSESSMENT 4 END
+				gObject.render(game.batch);	//Objects are now renderderred int his loop rather than being added to a list and then rendered
 			}
 		}
 		for (GameObject rObject : toRemove) {	//Remove game objects set for removal
 			gameObjects.remove(rObject);
 			if (rObject.isDisplayable()) {
-				rObject.render(game.batch);
+				toRender.add(rObject);
 			}
 		}
+		//Renders previously removed objects
+		for (GameObject dObject : toRender) {
+			dObject.render(game.batch);
+		}
+		//ASSESSMENT 4 END
+
 		//Add game objects to be added
 		gameObjects.addAll(objectsToAdd);
 
@@ -306,10 +313,7 @@ public class GameScreen implements Screen{
 			updateLives();
 		}
 		// TRUCK_SELECT_CHANGE_15 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
-
 	}
-
-	//ASSESSMENT 4 Removed class renderObjects due to, has been reworked to render during the updateObjects loop
 
 	/**
 	 * Add a game object next frame

@@ -9,6 +9,8 @@ import com.dicycat.kroy.Kroy;
 import com.dicycat.kroy.entities.FireTruck;
 import com.dicycat.kroy.scenes.HUD;
 
+import static com.dicycat.kroy.scenes.FireTruckSelectionScene.difficulty;
+
 /**
  * Projectile fired by hostile entities such as alien patrols or fortresses
  * 

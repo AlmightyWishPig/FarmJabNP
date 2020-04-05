@@ -29,7 +29,6 @@ public class FireTruckSelectionScene {
 	private SpriteBatch sb;
 	private NinePatchDrawable background = new NinePatchDrawable(new NinePatch(new Texture("Grey.png"), 3, 3, 3, 3));
 
-	public int difficulty = 2;
     private Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
     
     //Buttons initialised, labelled and stylised
@@ -48,6 +47,9 @@ public class FireTruckSelectionScene {
 	private TextButton hard = new TextButton("HARD", skin);
 	//enforces only one button pushed
 	private ButtonGroup buttonGroup = new ButtonGroup(easy, medium, hard);
+
+	//Allows other areas of the game to access the difficulty is normal but default
+	public static int difficulty = 2;
 	//ASSESSMENT 4 END
 
 	// TRUCK_SELECT_CHANGE_9 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----

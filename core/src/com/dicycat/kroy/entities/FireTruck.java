@@ -11,6 +11,7 @@ import com.dicycat.kroy.GameObject;
 import com.dicycat.kroy.Kroy;
 import com.dicycat.kroy.misc.StatBar;
 import com.dicycat.kroy.misc.WaterStream;
+import com.dicycat.kroy.scenes.FireTruckSelectionScene;
 import com.dicycat.kroy.screens.GameScreen;
 
 /**
@@ -377,6 +378,7 @@ public class FireTruck extends Entity{
 		}
 	}
 
+	//Added applyDamage for FireTrucks allowing them to have a shield
 	/**
 	 * Apply x amount of damage to the FireTruck if it does not have a shield
 	 * @param damage Amount of damage to inflict on the Entity
@@ -385,12 +387,14 @@ public class FireTruck extends Entity{
 	public void applyDamage(float damage) {
 		if (damage < 0){
 			throw new IllegalArgumentException("applyDamage(float damage) cannot be passed a negative float");
+		} else if (!this.hasShield){ //Does not take damage while the Truck has a shield
+			healthPoints -= damage * (FireTruckSelectionScene.difficulty * 0.5);  //Damage taken is modified based on difficulty
+			if (healthPoints <= 0) {
+				die();
+			}
 		}
-		if (!this.hasShield){
-		healthPoints -= damage;
-		if (healthPoints <= 0) {
-			die();
-		}}
 	}
 	//ASSESSMENT 4 END
 }
+
+

@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.Kroy;
 import com.dicycat.kroy.entities.Entity;
 
+import static com.dicycat.kroy.scenes.FireTruckSelectionScene.difficulty;
+
 /**
  * Stores and handles firing patterns
  * 
@@ -45,7 +47,9 @@ public class BulletDispenser {
 		patterns.add(pattern);
 		if (patterns.size() == 1) {	//If only pattern, set as firing pattern
 			firingPattern = patterns.get(0);
-			patternTime = firingPattern.getCooldown();
+			//ASSESSMENT 4 START
+			patternTime = (float)(firingPattern.getCooldown() * (1+ (4 - difficulty) * 0.5)); //Changes patterns faster on higher difficulties
+			//ASSESSMENT 4 END
 		}
 	}
 	
