@@ -71,11 +71,11 @@ public class FireTruckSelectionScene {
 		table.setBackground(background);
 
 		//ASSESSMENT 4 START
-		table.add(easy).width(centre/1.5f).colspan(4);
+		table.add(easy).width(centre/4.0f).colspan(4);
 		table.row();
-		table.add(medium).width(centre/1.5f).colspan(4);
+		table.add(medium).width(centre/4.0f).colspan(4);
 		table.row();
-		table.add(hard).width(centre/1.5f).colspan(4);
+		table.add(hard).width(centre/4.0f).colspan(4);
 		table.row();
 		//ASSESSMENT 4 END
 
