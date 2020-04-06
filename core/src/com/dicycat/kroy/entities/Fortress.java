@@ -8,6 +8,9 @@ import com.dicycat.kroy.bullets.BulletDispenser;
 import com.dicycat.kroy.bullets.Pattern;
 import com.dicycat.kroy.misc.StatBar;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * Hostile building which fires at the player when within its radius.
  */

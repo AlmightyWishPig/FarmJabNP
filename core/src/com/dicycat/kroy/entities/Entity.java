@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.GameObject;
 import com.dicycat.kroy.Kroy;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -81,11 +82,14 @@ public abstract class Entity extends GameObject{
 	}
 
 	//ASSESSMENT 4 START
-	public void saveEntity(String fileName){
-		try(FileWriter fileWriter = new FileWriter(fileName)) {
-			fileWriter.write(radius);
-			fileWriter.write(maxHealthPoints);
-			fileWriter.write(healthPoints);
+	public void saveEntity(File saveFile){
+		try(FileWriter fileWriter = new FileWriter(saveFile,true)) {
+			fileWriter.write(Integer.toString(radius));
+			fileWriter.write("\n");
+			fileWriter.write(Integer.toString(maxHealthPoints));
+			fileWriter.write("\n");
+			fileWriter.write(Integer.toString(healthPoints));
+			fileWriter.write("\n");
 		} catch (IOException e) {
 
 		}

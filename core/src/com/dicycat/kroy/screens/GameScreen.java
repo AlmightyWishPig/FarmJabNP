@@ -1,5 +1,6 @@
 package com.dicycat.kroy.screens;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.dicycat.kroy.GameObject;
 import com.dicycat.kroy.GameTextures;
 import com.dicycat.kroy.Kroy;
+import com.dicycat.kroy.bullets.Bullet;
 import com.dicycat.kroy.debug.DebugCircle;
 import com.dicycat.kroy.debug.DebugDraw;
 import com.dicycat.kroy.debug.DebugLine;
@@ -65,6 +67,8 @@ public class GameScreen implements Screen{
 	//ASSESSMENT 4 START
 	//Reworked the rendering system, this is now only used to render "removed" objects
 	List<GameObject> toRender = new ArrayList<>(); //Allows removed objects to be rendered
+
+	public File saveFile; // Allows saving a single gamefile
 	//ASSESSMENT 4 END
 
 	private HUD hud;
@@ -89,7 +93,7 @@ public class GameScreen implements Screen{
 	
 	private int fortressesCount;
 	private Vector2 spawnPosition;	//Coordinates the player spawns at
-	
+
 	private List<GameObject> gameObjects;	//List of active game objects
 	private List<GameObject> objectsToAdd;
 	private List<DebugDraw> debugObjects; //List of debug items
@@ -478,7 +482,7 @@ public class GameScreen implements Screen{
 		pauseWindow.save.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-
+				saveGame(1);
 			}
 		});
 		//ASSESSMENT 4 END
@@ -572,4 +576,20 @@ public class GameScreen implements Screen{
 		players.get(activeTruck).setSelected(true);
 	}
 	// TRUCK_SELECT_CHANGE_18 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
+
+	//ASSESSMENT 4 START
+	private void saveGame(int saveslot){
+		String fileName = saveslot + ".txt";
+		saveFile = new File(fileName);
+		saveFile.delete();
+		saveFile = new File(fileName);
+		for (GameObject sObject : gameObjects) {	//Remove game objects set for removal
+			if (sObject instanceof  Entity) { 	//Only entities can change therefore only entities are saved (apparently bullets are not entities)
+				((Entity) sObject).saveEntity(saveFile);
+			} else if (sObject instanceof Bullet) {
+				((Bullet) sObject).saveBullet(saveFile);
+			}
+		}
+	}
+	//ASSESSMENT 4 END
 }

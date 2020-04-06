@@ -9,6 +9,10 @@ import com.dicycat.kroy.Kroy;
 import com.dicycat.kroy.entities.FireTruck;
 import com.dicycat.kroy.scenes.HUD;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import static com.dicycat.kroy.scenes.FireTruckSelectionScene.difficulty;
 
 /**
@@ -117,4 +121,19 @@ public class Bullet extends GameObject {
 	// CODE_REFACTOR_1 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT
 	// Deleted unused getter
 	// CODE_REFACTOR_1 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT
+
+	//ASSESSMENT 4 START
+	public void saveBullet(File saveFile){
+		try(FileWriter fileWriter = new FileWriter(saveFile,true)) {
+			fileWriter.write(Integer.toString(speed));
+			fileWriter.write("\n");
+			fileWriter.write(Float.toString(maxDist));
+			fileWriter.write("\n");
+			fileWriter.write(Float.toString(travelDist));
+			fileWriter.write("\n");
+		} catch (IOException e) {
+			//This is required for fileWriter however it should not be possible to fail at this stage
+		}
+	}
+	//ASSESSMENT 4 END
 }
