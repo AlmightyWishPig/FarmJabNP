@@ -5,6 +5,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.GameObject;
 import com.dicycat.kroy.Kroy;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 import static com.dicycat.kroy.scenes.FireTruckSelectionScene.difficulty;
 
 /**
@@ -76,5 +79,17 @@ public abstract class Entity extends GameObject{
 	public int getHealthPoints(){
 		return healthPoints;
 	}
+
+	//ASSESSMENT 4 START
+	public void saveEntity(String fileName){
+		try(FileWriter fileWriter = new FileWriter(fileName)) {
+			fileWriter.write(radius);
+			fileWriter.write(maxHealthPoints);
+			fileWriter.write(healthPoints);
+		} catch (IOException e) {
+
+		}
+	}
+	//ASSESSMENT 4 END
 
 }

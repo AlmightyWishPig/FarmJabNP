@@ -147,7 +147,7 @@ public class OptionsWindow {
 		    });
 
 			//ASSESSMENT 4 START
-			//Removed redundant buttons
+			//Removed redundant mute/unmute music buttons
 			//ASSESSMENT 4 END
 
 			//backFromMusic button

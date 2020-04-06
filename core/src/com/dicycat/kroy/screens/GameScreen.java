@@ -473,6 +473,17 @@ public class GameScreen implements Screen{
 	    	}
 	    });
 
+		//ASSESSMENT 4 START
+		//resume button
+		pauseWindow.save.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+
+			}
+		});
+		//ASSESSMENT 4 END
+
+
 		//exit button
 		pauseWindow.exit.addListener(new ClickListener() {
 	    	@Override

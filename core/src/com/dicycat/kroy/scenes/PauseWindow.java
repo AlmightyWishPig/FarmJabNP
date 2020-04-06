@@ -23,13 +23,14 @@ import com.dicycat.kroy.Kroy;
 public class PauseWindow {
 	
 	public Stage stage;
-	public Table table = new Table();
+	private Table table = new Table();
 	private SpriteBatch sb;
 	private NinePatch patch = new NinePatch(new Texture("loool.jpg"), 3, 3, 3, 3);
 	private NinePatchDrawable background = new NinePatchDrawable(patch);
 	
     private Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
     public TextButton resume = new TextButton("RESUME", skin);
+	public TextButton save = new TextButton("SAVE GAME", skin);
     public TextButton exit = new TextButton("EXIT", skin);
     public TextButton menu = new TextButton("MENU", skin);
 
@@ -41,6 +42,8 @@ public class PauseWindow {
 		table.setBackground(background);
 		table.row();
 	    table.add(resume).width(Kroy.CentreWidth());
+		table.row();
+		table.add(save).width(Kroy.CentreWidth());
 		table.row();
 	    table.add(menu).width(Kroy.CentreWidth());
 	    table.row();

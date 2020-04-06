@@ -45,9 +45,7 @@ public class FireTruckSelectionScene {
 	private TextButton easy = new TextButton("EASY", skin);
 	private TextButton medium = new TextButton("NORMAL", skin);
 	private TextButton hard = new TextButton("HARD", skin);
-	//enforces only one button pushed
-	private ButtonGroup buttonGroup = new ButtonGroup(easy, medium, hard);
-
+	ButtonGroup buttonGroup = new ButtonGroup(easy, medium, hard);
 	//Allows other areas of the game to access the difficulty is normal but default
 	public static int difficulty = 2;
 	//ASSESSMENT 4 END
@@ -60,6 +58,7 @@ public class FireTruckSelectionScene {
 
 		//ASSESSMENT 4 START
 		//Ensures only one difficulty can be selected at a time
+		//enforces only one button pushed
 		buttonGroup.setMaxCheckCount(1);
 		buttonGroup.setMinCheckCount(0);
 		buttonGroup.setUncheckLast(true);
@@ -72,11 +71,11 @@ public class FireTruckSelectionScene {
 		table.setBackground(background);
 
 		//ASSESSMENT 4 START
-		table.add(easy).width(100).colspan(4);
+		table.add(easy).width(centre/1.5f).colspan(4);
 		table.row();
-		table.add(medium).width(100).colspan(4);
+		table.add(medium).width(centre/1.5f).colspan(4);
 		table.row();
-		table.add(hard).width(100).colspan(4);
+		table.add(hard).width(centre/1.5f).colspan(4);
 		table.row();
 		//ASSESSMENT 4 END
 
@@ -130,8 +129,6 @@ public class FireTruckSelectionScene {
 				difficulty = 3;
 				hard.getStyle().checked = hard.getStyle().down;
 			}});
-
-		easy.setStyle(easy.getStyle());
 		//ASSESSMENT 4 END
 	}
 	
