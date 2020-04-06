@@ -12,9 +12,12 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public abstract class GameObject {
+	//ASSESSMENT 4 START
+	//This class used getters for local variables, all instances of this have been removed
+
 	protected Sprite sprite;						//Sprite of the object
-	protected Boolean remove, displayable;			//Should this GameObject be removed? Should this item be displayed?
-	private float rotation = 0;	//Current angle the truck is facing in degrees
+	protected Boolean remove, displayable;			//Should this GameObject be removed or displayed?
+	private float rotation = 0;						//Current angle the truck is facing in degrees
 
 	public GameObject(Vector2 spawnPos, Texture image, Vector2 imSize) {	//Constructor; takes the screen to be put on, spawn position vector, image and a vector for its size
 		sprite = new Sprite(image,(int) spawnPos.x ,(int) spawnPos.y ,(int) imSize.x,(int) imSize.y); // sprite class stores the texture position and size of the object
@@ -33,7 +36,7 @@ public abstract class GameObject {
 	 * @param batch Batch to render
 	 */
 	public void render(SpriteBatch batch) {
-		batch.draw(getTexture(), getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getXScale(), getYScale(), getRotation(), 0, 0, getTextureWidth(), getTextureHeight(), false, false);
+		batch.draw(getTexture(), getX(), getY(), sprite.getOriginX(), sprite.getOriginY(), getWidth(), getHeight(), sprite.getScaleX(), sprite.getScaleY(), rotation, 0, 0, sprite.getTexture().getWidth(), sprite.getTexture().getHeight(), false, false);
 	}
 
 	/**
@@ -45,26 +48,10 @@ public abstract class GameObject {
 		sprite.setY(getY() + v.y);
 	}
 
-	//Getters
-	public Texture getTexture() { return sprite.getTexture(); }
-	public float getHeight() { return sprite.getHeight(); }
-	public float getWidth() {return sprite.getWidth(); }
-	public float getX() { return sprite.getX(); }
-	public float getY() { return sprite.getY(); }
-	public Boolean isRemove() { return remove; }
-	public float getOriginX () { return sprite.getOriginX(); } // returns centre of sprite (25, 50) Use GetCentre for position on screen
-	public float getOriginY() {return sprite.getOriginY(); }
-	public  float getXScale() { return sprite.getScaleX(); }
-	public float getYScale() { return sprite.getScaleY(); }
-	public float getRotation() { return rotation; }
-	public int getTextureWidth() { return sprite.getTexture().getWidth(); }
-	public int getTextureHeight() {	return sprite.getTexture().getHeight(); }
-	public Sprite getSprite() { return sprite; }
-	public Vector2 getPosition() { return new Vector2(getX(), getY());  }
-	public boolean isDisplayable() { return displayable; }
 
 
 	//ASSESSMENT 4 START
+	//This has been added to allow changing the sprite of a powerup
 	/**
 	 * Allows changing the sprite for gameObjects
 	 * @param image the texture to change to
@@ -79,8 +66,10 @@ public abstract class GameObject {
 	 * @return Centre of GameObject
 	 */
 	public Vector2 getCentre() {
-		return new Vector2(getOriginX()+getX(), getOriginY()+getY());
+		return new Vector2(sprite.getOriginX()+sprite.getX(), sprite.getOriginY()+sprite.getY());
 	}
+
+	//ASSESSMENT 4 END
 
 	//Setters
 	public void setPosition(Vector2 pos) {
@@ -106,4 +95,22 @@ public abstract class GameObject {
 	public void die() {
 		remove = true;
 	}
+
+	//Getters
+	public Texture getTexture() { return sprite.getTexture(); }
+	public float getHeight() { return sprite.getHeight(); }
+	public float getWidth() {return sprite.getWidth(); }
+	public float getX() { return sprite.getX(); }
+	public float getY() { return sprite.getY(); }
+	public Boolean isRemove() { return remove; }
+	public float getOriginX () { return sprite.getOriginX(); } // returns centre of sprite (25, 50) Use GetCentre for position on screen
+	public float getOriginY() {return sprite.getOriginY(); }
+	public  float getXScale() { return sprite.getScaleX(); }
+	public float getYScale() { return sprite.getScaleY(); }
+	public float getRotation() { return rotation; }
+	public int getTextureWidth() { return sprite.getTexture().getWidth(); }
+	public int getTextureHeight() {	return sprite.getTexture().getHeight(); }
+	public Sprite getSprite() { return sprite; }
+	public Vector2 getPosition() { return new Vector2(getX(), getY());  }
+	public boolean isDisplayable() { return displayable; }
 }
