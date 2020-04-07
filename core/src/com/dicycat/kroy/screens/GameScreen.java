@@ -68,7 +68,7 @@ public class GameScreen implements Screen{
 	//Reworked the rendering system, this is now only used to render "removed" objects
 	List<GameObject> toRender = new ArrayList<>(); //Allows removed objects to be rendered
 
-	public File saveFile; // Allows saving a single gamefile
+	private File saveFile; // Allows saving a single gamefile
 	//ASSESSMENT 4 END
 
 	private HUD hud;
@@ -582,12 +582,14 @@ public class GameScreen implements Screen{
 		String fileName = saveslot + ".txt";
 		saveFile = new File(fileName);
 		saveFile.delete();
-		saveFile = new File(fileName);
-		for (GameObject sObject : gameObjects) {	//Remove game objects set for removal
-			if (sObject instanceof  Entity) { 	//Only entities can change therefore only entities are saved (apparently bullets are not entities)
-				((Entity) sObject).saveEntity(saveFile);
-			} else if (sObject instanceof Bullet) {
-				((Bullet) sObject).saveBullet(saveFile);
+		if(!saveFile.exists()) { //Prevents writing to a file before it has been cleared
+			saveFile = new File(fileName);
+			for (GameObject sObject : gameObjects) {    //Remove game objects set for removal
+				if (sObject instanceof Entity) {    //Only entities can change therefore only entities are saved (apparently bullets are not entities)
+					((Entity) sObject).saveEntity(saveFile);
+				} else if (sObject instanceof Bullet) {
+					((Bullet) sObject).saveBullet(saveFile);
+				}
 			}
 		}
 	}

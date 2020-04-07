@@ -395,6 +395,19 @@ public class FireTruck extends Entity{
 		}
 	}
 
+	//Used when saving the FireTruck
+	public float getCurrentWater(){
+		return this.currentWater;
+	}
+	public float getDamageTimer(){
+		return this.damageTimer;
+	}
+	public float getShieldTimer(){
+		return this.shieldTimer;
+	}
+	public float getSpeedTimer(){
+		return this.speedTimer;
+	}
 
 
 	//ASSESSMENT 4 END

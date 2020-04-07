@@ -84,12 +84,29 @@ public abstract class Entity extends GameObject{
 	//ASSESSMENT 4 START
 	public void saveEntity(File saveFile){
 		try(FileWriter fileWriter = new FileWriter(saveFile,true)) {
+			//Stats that are specific to a FireTruck
+			if (this instanceof  FireTruck){
+				fileWriter.write("FireTruck"); //For debugging only
+				fileWriter.write("\n");
+				fileWriter.write(Boolean.toString(this.isRemove()));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(((FireTruck) this).getCurrentWater()));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(((FireTruck) this).getSpeedTimer()));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(((FireTruck) this).getShieldTimer()));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(((FireTruck) this).getDamageTimer()));
+				fileWriter.write("\n");
+			}
 			fileWriter.write(Integer.toString(radius));
 			fileWriter.write("\n");
 			fileWriter.write(Integer.toString(maxHealthPoints));
 			fileWriter.write("\n");
 			fileWriter.write(Integer.toString(healthPoints));
 			fileWriter.write("\n");
+			fileWriter.write(Boolean.toString(this.isRemove()));
+			fileWriter.write("\nend\n\n");
 		} catch (IOException e) {
 
 		}
