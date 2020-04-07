@@ -26,7 +26,11 @@ import com.dicycat.kroy.scenes.OptionsWindow;
  */
 public class MenuScreen implements Screen{
   
-  private Kroy game; 
+  private Kroy game;
+  //ASSESSMENT 4 START
+	//Tells the game while saveFile to load
+  public static int loadFile = 0;
+  //ASSESSMENT 3 END
   private OrthographicCamera gamecam;	//m
   private Viewport gameport; 	//m
   private Texture background,
@@ -39,7 +43,12 @@ public class MenuScreen implements Screen{
   	optionsButtonActiveTexture, 
   	exitButtonTexture, 
   	exitButtonActiveTexture, 
-  	minigameButtonTexture, 
+  	minigameButtonTexture,
+	//ASSESSMENT 4 START
+	//Added a load Button that needed a texture
+	loadButtonTexture,
+	loadButtonActiveTexture,
+	//ASSESSMENT 4 END
   	minigameButtonActiveTexture, 
 // REFACTOR_CHANGE_1 - END OF MODIFICATION - NP STUDIOS - JORDAN SPOONER -----
 
@@ -72,14 +81,15 @@ public class MenuScreen implements Screen{
   private int buttonHeight = 50;
   private int xAxisCentred = (Kroy.width/2) - (buttonWidth/2);
   private int playButtonY = (Kroy.height/2)+75;
-  private int optionsButtonY = (Kroy.height/2);
-  private int minigameButtonY = (Kroy.height/2)-75;
+  private int loadButtonY = (Kroy.height/2);
+  private int optionsButtonY = (Kroy.height/2)-75;
+  private int minigameButtonY = (Kroy.height/2)-150;
 
   // CONTROL_SCREEN_3 - START OF MODIFICATION - NP STUDIOS - JORDAN SPOONER
   	// assigning this variable the y coordinate for where the controlsButton button instance will be placed on the main menu
-  private int controlsButtonY = (Kroy.height/2)-150;
+  private int controlsButtonY = (Kroy.height/2)-225;
   // CONTROL_SCREEN_3 END OF MODIFICATION - NP STUDIOS - JORDAN SPOONER
-  private int exitButtonY = (Kroy.height/2)-225;
+  private int exitButtonY = (Kroy.height/2)-300;
   
   private Pixmap pm = new Pixmap(Gdx.files.internal("handHD2.png")); //cursor
   private int xHotSpot = pm.getWidth() / 3;	//where the cursor's aim is 
@@ -88,6 +98,9 @@ public class MenuScreen implements Screen{
   private FireTruckSelectionScene fireTruckSelector;
   private boolean currentlyRunningGame = false;
 
+
+ 	//ASSESSMENT 4 START
+	// Added LOADGAME state to allow for selecting a save file
   /**
    *  Used to define the current state of the screen, 
    *  MAINMENU is used mostly but then TRUCKSELECT used when the "NewGame" button has been pressed
@@ -96,6 +109,7 @@ public class MenuScreen implements Screen{
 	  MAINMENU,
 	  TRUCKSELECT,
 	  OPTIONS,
+	  LOADGAME,
 	  MINIGAME,
 	  // CONTROL_SCREEN_4 - START OF MODIFICATION - NP STUDIOS - JORDAN SPOONER
 	  CONTROLS // adding a new window state, the controls window, has the code that calls the creation and setup of the controls window
@@ -111,6 +125,12 @@ public class MenuScreen implements Screen{
 	  optionsButtonTexture = new Texture("options.png");
 	  optionsButtonActiveTexture = new Texture("optionsActive.png");
 	  playButtonTexture = new Texture("newgame.png");
+
+	  //ASSESSMENT 4 START
+	  loadButtonTexture = new Texture("load.png");
+	  loadButtonActiveTexture = new Texture("loadActive.png");
+	  //ASSESSMENT 4 END
+
 	  playButtonActiveTexture = new Texture("newActive.png");
 	  minigameButtonTexture = new Texture("minigame.png");
 	  minigameButtonActiveTexture = new Texture("minigameActive.png");
@@ -183,8 +203,18 @@ public class MenuScreen implements Screen{
 				  setGameState(MenuScreenState.TRUCKSELECT);// set the game state to run and run the selection screen code
 				  return;
 			  }
-			  
-			  
+
+			  //ASSESSMENT 4 START
+			  Button loadButton = new Button(loadButtonY, loadButtonTexture, loadButtonActiveTexture, game);
+			  if (loadButton.buttonAction()) {
+				  this.dispose();
+				  game.batch.end();
+				  loadFile = 1;
+				  startGame(); // Starts the game with a load
+				  return;
+			  }
+			  //ASSESSMENT 4 END
+
 			  //for exit button
 			  		// button created
 			  Button test_exitButton = new Button(exitButtonY, exitButtonTexture, exitButtonActiveTexture, game);
@@ -291,12 +321,13 @@ public class MenuScreen implements Screen{
 	// TRUCK_SELECT_CHANGE_20 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	// Removed unused parameters which were modified elsewhere
 	public void startGame() {
-		 if (!currentlyRunningGame) {	// Checks if a new GameScren is currently running and either makes one or ignores the commands
+		 if (!currentlyRunningGame) {	// Checks if a new GameScrene is currently running and either makes one or ignores the commands
 			 currentlyRunningGame = true; // Makes sure that only one GameScreen is opened at once
 			 game.newGame(); // Calls the function in Kroy to start a new game
 		 }
 	}
 	// TRUCK_SELECT_CHANGE_20 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
+
 
   public void setCurrentlyRunningGame(boolean state) {
 	  currentlyRunningGame = state;
