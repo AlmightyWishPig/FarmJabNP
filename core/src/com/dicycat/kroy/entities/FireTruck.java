@@ -38,7 +38,7 @@ public class FireTruck extends Entity{
 	private WaterStream water;
 	private StatBar tank;
 	private StatBar healthBar;
-	private boolean firing, hasSpeed, hasDamage, hasShield = true; //Booleans to track what powerups the truck has active
+	private boolean firing, hasSpeed, hasDamage, hasShield; //Booleans to track what powerups the truck has active
 	private float speedTimer, damageTimer, shieldTimer; //Timers to track when powerups needs to be removed
 	private float range;
 
@@ -409,6 +409,29 @@ public class FireTruck extends Entity{
 		return this.speedTimer;
 	}
 
+
+	//Getters and Setters used for loading and saving
+	public void setCurrentWater(float currentWater) {
+		this.currentWater = currentWater;
+	}
+	public void setShieldTimer(float shieldTimer) {
+		if (shieldTimer != 0) {
+			this.shieldTimer = shieldTimer;
+			this.hasShield = true;
+		}
+	}
+	public void setDamageTimer(float shieldTimer) {
+		if (shieldTimer != 0) {
+			this.damageTimer = shieldTimer;
+			this.hasDamage = true;
+		}
+	}
+	public void setSpeedTimer(float shieldTimer) {
+		if (shieldTimer != 0) {
+			this.speedTimer = shieldTimer;
+			this.hasSpeed = true;
+		}
+	}
 
 	//ASSESSMENT 4 END
 }

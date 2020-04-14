@@ -1,6 +1,6 @@
 package com.dicycat.kroy.screens;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
@@ -26,11 +26,14 @@ import com.dicycat.kroy.debug.DebugRect;
 import com.dicycat.kroy.entities.*;
 import com.dicycat.kroy.gamemap.TiledGameMap;
 import com.dicycat.kroy.minigame.Minigame;
+import com.dicycat.kroy.scenes.FireTruckSelectionScene;
 import com.dicycat.kroy.scenes.HUD;
 import com.dicycat.kroy.scenes.OptionsWindow;
 import com.dicycat.kroy.scenes.PauseWindow;
 
 import static com.badlogic.gdx.Gdx.graphics;
+import static com.dicycat.kroy.screens.MenuScreen.loadFile;
+import static java.lang.Integer.parseInt;
 
 
 /**
@@ -161,7 +164,6 @@ public class GameScreen implements Screen{
 		}
 		// PATROLS_4 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT ------------
 
-		//INSERT POWERUPS HERE
 
 
 		// FORTRESS_HEALTH_1 - START OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE ----
@@ -189,6 +191,11 @@ public class GameScreen implements Screen{
 		gameObjects.add(new Powerups(new Vector2(6629,2518))); //
 		gameObjects.add(new Powerups(new Vector2(1478,2022))); //
 		gameObjects.add(new Powerups(new Vector2(5461,1286))); //
+		//ASSESSMENT 4 END
+
+		if (loadFile != 0){
+			loadGame(loadFile);
+		}
 	}
 
 	/**
@@ -579,19 +586,48 @@ public class GameScreen implements Screen{
 
 	//ASSESSMENT 4 START
 	private void saveGame(int saveslot){
-		String fileName = saveslot + ".txt";
+		String fileName = saveslot + ".kroy"; //File is saved with the .Kroy extension to prevent overwriting existing files
 		saveFile = new File(fileName);
-		saveFile.delete();
-		if(!saveFile.exists()) { //Prevents writing to a file before it has been cleared
+		System.out.println(saveFile.delete());
+		if (!saveFile.exists()) { //Prevents writing to a file before it has been cleared
 			saveFile = new File(fileName);
-			for (GameObject sObject : gameObjects) {    //Remove game objects set for removal
-				if (sObject instanceof Entity) {    //Only entities can change therefore only entities are saved (apparently bullets are not entities)
-					((Entity) sObject).saveEntity(saveFile);
-				} else if (sObject instanceof Bullet) {
-					((Bullet) sObject).saveBullet(saveFile);
+			try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(saveFile,true))) {
+				fileWriter.write(Integer.toString(FireTruckSelectionScene.difficulty));
+				fileWriter.write("\n");
+				fileWriter.write(Integer.toString(activeTruck));
+				fileWriter.write("\n");
+				fileWriter.close();
+				for (GameObject sObject : gameObjects) {
+					if (sObject instanceof Entity) {    //Only entities and bullets can change so only they are saved
+						((Entity) sObject).saveEntity(saveFile);
+					} else if (sObject instanceof Bullet) {
+						((Bullet) sObject).saveBullet(saveFile);
+					}
 				}
-			}
+			} catch (IOException e) {}
 		}
+	}
+
+	private void loadGame(int saveslot){
+		ArrayList<String> saveInfo = new ArrayList<>(); //Used to save the file lines
+		int lineNo = 0; //Used to track location within the file
+		String line;
+		try {
+			String fileName = saveslot + ".kroy";
+			saveFile = new File(fileName);
+			BufferedReader reader = new BufferedReader(new FileReader(saveFile));
+			FireTruckSelectionScene.difficulty = parseInt(reader.readLine());
+			activeTruck = parseInt(reader.readLine());
+			while ((line = reader.readLine()) != null) {
+				saveInfo.add(line);
+			}
+			for (GameObject object : gameObjects) {
+				lineNo = ((Entity) object).loadEntity(saveInfo, lineNo);
+			}
+			reader.close();
+	}
+		catch (FileNotFoundException exception) { }
+		catch (IOException e) { }
 	}
 	//ASSESSMENT 4 END
 }

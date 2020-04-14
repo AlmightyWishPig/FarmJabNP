@@ -9,6 +9,7 @@ import com.dicycat.kroy.Kroy;
 import com.dicycat.kroy.entities.FireTruck;
 import com.dicycat.kroy.scenes.HUD;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -124,7 +125,7 @@ public class Bullet extends GameObject {
 
 	//ASSESSMENT 4 START
 	public void saveBullet(File saveFile){
-		try(FileWriter fileWriter = new FileWriter(saveFile,true)) {
+		try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(saveFile,true))) {
 			fileWriter.write("Bullet"); //For debugging
 			fileWriter.write("\n");
 			fileWriter.write(Integer.toString(speed));
@@ -132,7 +133,8 @@ public class Bullet extends GameObject {
 			fileWriter.write(Float.toString(maxDist));
 			fileWriter.write("\n");
 			fileWriter.write(Float.toString(travelDist));
-			fileWriter.write("\nend\n\n");
+			fileWriter.write("\n");
+			fileWriter.close();
 		} catch (IOException e) {
 			//This is required for fileWriter however it should not be possible to fail at this stage
 		}
