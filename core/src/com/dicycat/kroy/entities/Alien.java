@@ -132,4 +132,17 @@ public class Alien extends Entity {
 			}
 		}
 	}
+
+	//ASSESSMENT 4 START
+
+	//Allows the alien to move correclty on a reload
+	public int getCurrentWaypoint(){return this.currentWaypoint;}
+	public void setCurrentWaypoint( int currentWaypoint){this.currentWaypoint = currentWaypoint;}
+
+	public float getMovementCountdown(){return this.movementCountdown;}
+	public void setMovementCountdown( float movementCountdown){this.movementCountdown = movementCountdown;}
+
+
+	//ASSESSMENT 4 END
+
 }

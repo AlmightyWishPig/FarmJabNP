@@ -97,6 +97,11 @@ public abstract class Entity extends GameObject{
 				fileWriter.write("\n");
 				fileWriter.write(Float.toString(((FireTruck) this).getDamageTimer()));
 				fileWriter.write("\n");
+			} else if (this instanceof Alien) {
+				fileWriter.write(Integer.toString(((Alien) this).getCurrentWaypoint()));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(((Alien) this).getMovementCountdown()));
+				fileWriter.write("\n");
 			}
 			fileWriter.write(Integer.toString(healthPoints));
 			fileWriter.write("\n");
@@ -122,6 +127,11 @@ public abstract class Entity extends GameObject{
 			((FireTruck)this).setShieldTimer(Float.parseFloat(saveInfo.get(lineNo)));
 			lineNo++;
 			((FireTruck)this).setDamageTimer(Float.parseFloat(saveInfo.get(lineNo)));
+			lineNo++;
+		} else if (this instanceof Alien) {
+			((Alien)this).setCurrentWaypoint(Integer.parseInt(saveInfo.get(lineNo)));
+			lineNo++;
+			((Alien)this).setMovementCountdown(Float.parseFloat(saveInfo.get(lineNo)));
 			lineNo++;
 		}
 		this.healthPoints = Integer.parseInt(saveInfo.get(lineNo));
