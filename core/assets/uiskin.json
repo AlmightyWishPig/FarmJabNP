@@ -23,8 +23,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	toggle: {down: apptheme_btn_toggle_off_pressed_holo_light, up: apptheme_btn_toggle_off_normal_holo_light, over: apptheme_btn_toggle_off_focused_holo_light, disabled: apptheme_btn_toggle_off_disabled_holo_light, checked: apptheme_btn_toggle_on_normal_holo_light, checkedOver: apptheme_btn_toggle_on_focused_holo_light }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: {down: apptheme_btn_default_pressed_holo_light, up: apptheme_btn_default_normal_holo_light, disabled: apptheme_btn_default_disabled_holo_light, font: default-font, fontColor: default, downFontColor: inverse, disabledFontColor: grey },
-	colored: {down: apptheme_btn_colored_pressed_holo_light, up: apptheme_btn_colored_normal_holo_light, disabled: apptheme_btn_colored_disabled_holo_light, font: default-font, fontColor: default, downFontColor: inverse, disabledFontColor: grey },
+	default: {down: apptheme_btn_default_pressed_holo_light, up: apptheme_btn_default_normal_holo_light, disabled: apptheme_btn_default_disabled_holo_light, font: default-font, fontColor: white, downFontColor: inverse, disabledFontColor: grey },
+	colored: {down: apptheme_btn_colored_pressed_holo_light, up: apptheme_btn_colored_normal_holo_light, disabled: apptheme_btn_colored_disabled_holo_light, font: default-font, fontColor: white, downFontColor: inverse, disabledFontColor: grey },
 	toggle: {down: apptheme_btn_toggle_off_pressed_holo_light, up: apptheme_btn_toggle_off_normal_holo_light, over: apptheme_btn_toggle_off_focused_holo_light, disabled: apptheme_btn_toggle_off_disabled_holo_light, checked: apptheme_btn_toggle_on_normal_holo_light, checkedOver: apptheme_btn_toggle_on_focused_holo_light, font: default-font, fontColor: default, downFontColor: inverse, disabledFontColor: grey }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
@@ -58,7 +58,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 	default-vertical: {background: apptheme_progress_vertical_bg_holo_light, knobBefore: apptheme_progress_vertical_primary_holo_light, knob: apptheme_fastscroll_thumb_pressed_holo_v }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-	default: {font: default-font, fontColor: default }
+	default: {font: default-font, fontColor: white }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {selection: apptheme_list_activated_holo, background: apptheme_textfield_default_holo_light, focusedBackground: apptheme_textfield_focused_holo_light, disabledBackground: apptheme_textfield_disabled_holo_light, font: default-font, fontColor: default, disabledFontColor: grey, cursor: cursor },

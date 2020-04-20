@@ -8,12 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.dicycat.kroy.Kroy;
+
+import java.awt.*;
 
 
 /**
@@ -27,18 +31,23 @@ public class FireTruckSelectionScene {
 	public Stage stage;
 	public Table table = new Table();
 	private SpriteBatch sb;
-	private NinePatchDrawable background = new NinePatchDrawable(new NinePatch(new Texture("Grey.png"), 3, 3, 3, 3));
 
     private Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+    //ASSESSMENT 4 START
+	//Added a background to this window
+	private NinePatch patch = new NinePatch(new Texture("firetruckselect.jpg"), 3, 3, 3, 3);   // splits texture into nine 'patches' and gives a border of 3 pixels wide/tall on (texture,left,right,top,bottom)
+	private NinePatchDrawable background = new NinePatchDrawable(patch);
+	//ASSESSMENT 4 END
     
     //Buttons initialised, labelled and stylised
 	// TRUCK_SELECT_CHANGE_9 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	// Changed truck selection buttons to labels to show the user which colour firetruck has the stat boost, rather than
 	// let them pick a firetruck. Added a button to start the game.
-    private Label truck1 = new Label("Speed", skin);
-    private Label truck2 = new Label("Damage", skin);
-    private Label truck3 = new Label("Capacity", skin);
-    private Label truck4 = new Label("Range", skin);
+    private Label truck1 = new Label("Speed",skin);
+    private Label truck2 = new Label("Damage",skin);
+    private Label truck3 = new Label("Capacity",skin);
+    private Label truck4 = new Label("Range",skin);
 	public TextButton startGameButton = new TextButton("Start Game", skin);
 
 	//ASSESSMENT 4 START
@@ -55,7 +64,6 @@ public class FireTruckSelectionScene {
     private float centre = width* 0.7f;
 
 	public FireTruckSelectionScene(Kroy game) {
-
 		//ASSESSMENT 4 START
 		//Ensures only one difficulty can be selected at a time
 		//enforces only one button pushed
