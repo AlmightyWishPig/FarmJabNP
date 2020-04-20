@@ -32,7 +32,7 @@ public class ControlsWindow {
 	private SpriteBatch sb;
 	//ASSESSMENT 4 START
 	//Removed all instances of "loool.png"
-	private NinePatch patch = new NinePatch(new Texture("controlsbackground.jpg"), 3, 3, 3, 3);   // splits texture into nine 'patches' and gives a border of 3 pixels wide/tall on (texture,left,right,top,bottom)
+	private NinePatch patch = new NinePatch(new Texture("controlsbackground.png"), 3, 3, 3, 3);   // splits texture into nine 'patches' and gives a border of 3 pixels wide/tall on (texture,left,right,top,bottom)
 	//ASSESSMENT 4 END
 	private NinePatchDrawable background = new NinePatchDrawable(patch);
 	
