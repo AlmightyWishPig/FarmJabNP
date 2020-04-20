@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.GameObject;
+import com.dicycat.kroy.GameTextures;
 import com.dicycat.kroy.Kroy;
 import com.dicycat.kroy.misc.StatBar;
 import com.dicycat.kroy.misc.WaterStream;
@@ -186,7 +187,7 @@ public class FireTruck extends Entity{
 		tank.setBarDisplay((currentWater/maxWater)*50);
 
 		healthBar.setPosition(getCentre().add(0,25));
-		healthBar.setBarDisplay((healthPoints*50)/maxHealthPoints);
+		healthBar.setBarDisplay( (healthPoints*50) / maxHealthPoints);
 
 		removePowerUps(delta);
 	}
@@ -373,6 +374,8 @@ public class FireTruck extends Entity{
 		}if (this.hasShield) {
 			this.shieldTimer += delta;
 			if (this.shieldTimer > 5) {
+				removeShield();
+				this.shieldTimer = 0;
 				this.hasShield = false;
 			}
 		}
@@ -416,6 +419,7 @@ public class FireTruck extends Entity{
 	}
 	public void setShieldTimer(float shieldTimer) {
 		if (shieldTimer != 0) {
+			addShield();
 			this.shieldTimer = shieldTimer;
 			this.hasShield = true;
 		}
@@ -432,6 +436,28 @@ public class FireTruck extends Entity{
 			this.hasSpeed = true;
 		}
 	}
+
+	private void addShield(){
+		if (this.getTexture() == Kroy.mainGameScreen.textures.getTruck(0)) {
+			this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(0));
+		} else if (this.getTexture() == Kroy.mainGameScreen.textures.getTruck(1)) {
+			this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(1));
+		} else if (this.getTexture() == Kroy.mainGameScreen.textures.getTruck(2)) {
+			this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(2));
+		} else if (this.getTexture() == Kroy.mainGameScreen.textures.getTruck(3)) {
+			this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(3));
+		}
+	}
+	private void removeShield(){if (this.getTexture() == Kroy.mainGameScreen.textures.getShieldTruck(0)) {
+		this.setTexture(Kroy.mainGameScreen.textures.getTruck(0));
+	} else if (this.getTexture() == Kroy.mainGameScreen.textures.getShieldTruck(1)) {
+		this.setTexture(Kroy.mainGameScreen.textures.getTruck(1));
+	} else if (this.getTexture() == Kroy.mainGameScreen.textures.getShieldTruck(2)) {
+		this.setTexture(Kroy.mainGameScreen.textures.getTruck(2));
+	} else if (this.getTexture() == Kroy.mainGameScreen.textures.getShieldTruck(3)) {
+		this.setTexture(Kroy.mainGameScreen.textures.getTruck(3));
+	}}
+
 
 	//ASSESSMENT 4 END
 }

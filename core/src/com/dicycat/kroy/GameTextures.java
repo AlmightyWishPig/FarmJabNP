@@ -18,8 +18,11 @@ public class GameTextures {
 	// TRUCK_SELECT_CHANGE_1 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	// Changed truck texture to truck0, truck1, truck2, truck3 as all the different textures will be used with our
 	// new selection method and defined the array list which will be used to store them
-	private Texture truck0, truck1, truck2, truck3, ufo, bullet, fireStation, fireStationDead;
+	private Texture truck0, truck1, truck2, truck3, ufo, bullet, fireStation, fireStationDead, shieldtruck0, shieldtruck1, shieldtruck2,shieldtruck3;
 	private ArrayList<Texture> trucks;
+	//ASSESSMENT 4 START
+	private ArrayList<Texture> shieldTrucksList;
+	//ASSESSMENT 4 END
 
 	// TRUCK_SELECT_CHANGE_1 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	// NEW_FORTRESSES_1 - START OF MODIFICATION - NP STUDIOS - Alasdair Pilmore-Bedford ---------------------------
@@ -34,6 +37,9 @@ public class GameTextures {
 	// NEW_FORTRESSES_1 - END OF MODIFICATION - NP STUDIOS - Alasdair Pilmore-Bedford ---------------------------
 
 	private String[] truckAddress = {"fireTruck1.png", "fireTruck2.png", "fireTruck3.png", "fireTruck4.png"};
+	//ASSESSMENT 4 START
+	private String[] shieldTrucks = {"fireTruck1shield.png","fireTruck2shield.png","fireTruck3shield.png","fireTruck4shield.png"};
+	//ASSESSMENT 4 END
 
 	public GameTextures() {
 		// TRUCK_SELECT_CHANGE_2 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
@@ -44,6 +50,13 @@ public class GameTextures {
 		truck3 = new Texture(truckAddress[3]);
 		trucks = new ArrayList<>(Arrays.asList(truck0, truck1, truck2, truck3));
 		// TRUCK_SELECT_CHANGE_2 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
+		//ASSESSMENT 4 START
+		shieldtruck0 = new Texture(truckAddress[0]);
+		shieldtruck1 = new Texture(truckAddress[1]);
+		shieldtruck2 = new Texture(truckAddress[2]);
+		shieldtruck3 = new Texture(truckAddress[3]);
+		shieldTrucksList = new ArrayList<>(Arrays.asList(shieldtruck0, shieldtruck1, shieldtruck2, shieldtruck3));
+		//ASSESSMENT 4 END
 		ufo = new Texture("ufo.png");
 		bullet = new Texture("bullet.png");
 		fireStation = new Texture("FireStationTemp.png");
@@ -58,6 +71,12 @@ public class GameTextures {
 		return trucks.get(truckNum);
 	}
 	// TRUCK_SELECT_CHANGE_13 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
+
+	//ASSESSMENT 4 START
+	public Texture getShieldTruck(int truckNum) {
+		return shieldTrucksList.get(truckNum);
+	}
+	//ASSESSMENT 4 END
 	
 	public Texture getUFO() {
 		return ufo;
