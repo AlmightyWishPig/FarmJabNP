@@ -450,7 +450,6 @@ public class FireTruck extends Entity{
 
 	private void addShield(){
 		this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(truckNum));
-		System.out.println(this.getTexture());
 	}
 	private void removeShield(){
 		this.setTexture(Kroy.mainGameScreen.textures.getTruck(truckNum));
