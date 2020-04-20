@@ -588,7 +588,7 @@ public class GameScreen implements Screen{
 	private void saveGame(int saveslot){
 		String fileName = saveslot + ".kroy"; //File is saved with the .Kroy extension to prevent overwriting existing files
 		saveFile = new File(fileName);
-		System.out.println(saveFile.delete());
+		saveFile.delete();
 		if (!saveFile.exists()) { //Prevents writing to a file before it has been cleared
 			saveFile = new File(fileName);
 			try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(saveFile,true))) {

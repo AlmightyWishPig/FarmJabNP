@@ -199,6 +199,7 @@ public class MenuScreen implements Screen{
 			  if (playButton.buttonAction()) {
 				  this.dispose();
 				  game.batch.end();
+				  loadFile = 0;
 				  fireTruckSelector.visibility(true);// display the truck selection window
 				  setGameState(MenuScreenState.TRUCKSELECT);// set the game state to run and run the selection screen code
 				  return;

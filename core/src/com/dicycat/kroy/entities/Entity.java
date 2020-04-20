@@ -1,5 +1,6 @@
 package com.dicycat.kroy.entities;
 // JS test for using git with eclipse
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.GameObject;
@@ -100,7 +101,7 @@ public abstract class Entity extends GameObject{
 			} else if (this instanceof Alien) {
 				fileWriter.write(Integer.toString(((Alien) this).getCurrentWaypoint()));
 				fileWriter.write("\n");
-				fileWriter.write(Float.toString(((Alien) this).getMovementCountdown()));
+				fileWriter.write(Float.toString(((Alien) this).getMovementCountdown() + Gdx.graphics.getDeltaTime()));
 				fileWriter.write("\n");
 			}
 			fileWriter.write(Integer.toString(healthPoints));
