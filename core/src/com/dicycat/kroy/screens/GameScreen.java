@@ -515,9 +515,7 @@ public class GameScreen implements Screen{
 	/**
 	 * Remove one fortress to the fortressCount
 	 */
-	public void removeFortress() {
-		fortressesCount--;
-	}
+	public void removeFortress() { fortressesCount--;}
 
 	/**
 	 * How many fortresses are left?
@@ -595,6 +593,8 @@ public class GameScreen implements Screen{
 				fileWriter.write(Integer.toString(FireTruckSelectionScene.difficulty));
 				fileWriter.write("\n");
 				fileWriter.write(Integer.toString(activeTruck));
+				fileWriter.write("\n");
+				fileWriter.write(Integer.toString(fortressesCount));
 				fileWriter.write("\n");
 				fileWriter.close();
 				for (GameObject sObject : gameObjects) {
