@@ -39,7 +39,7 @@ public class Powerups extends Entity{
         Random r = new Random();
         int typeNumber = r.nextInt(4);
         switch(typeNumber){
-            case 4:
+            case 0:
                 this.type = "speed";
                 this.setTexture(new Texture("speed.png"));
                 break;
