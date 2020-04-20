@@ -42,9 +42,14 @@ public class FireTruck extends Entity{
 	private boolean firing, hasSpeed, hasDamage, hasShield; //Booleans to track what powerups the truck has active
 	private float speedTimer, damageTimer, shieldTimer; //Timers to track when powerups needs to be removed
 	private float range;
+	//ASSESSMENT 4 START
+	private int truckNum; //Used to keep track of the colour of the truck
+	//ASSESSMENT 4 END
 
 	public FireTruck(Vector2 spawnPos, Float[] truckStats, int truckNum) {
 		super(spawnPos, Kroy.mainGameScreen.textures.getTruck(truckNum), new Vector2(25,50), 100, 500);
+
+		this.truckNum = truckNum;
 
 		DIRECTIONS.put("n",0);			//North Facing Direction (up arrow)
 		DIRECTIONS.put("w",90);			//West Facing Direction (left arrow)
@@ -345,6 +350,7 @@ public class FireTruck extends Entity{
 				break;
 			case "shield":
 				this.hasShield = true;
+				addShield();
 				this.shieldTimer = 0;
 				break;
 			case "refill":
@@ -363,12 +369,14 @@ public class FireTruck extends Entity{
 			this.speedTimer += delta;
 			if (this.speedTimer > 5) {
 				this.hasSpeed = false;
+				this.speedTimer = 0;
 				this.speed = (float)(this.speed / 1.3);
 			}
 		}if (this.hasDamage) {
 			this.damageTimer += delta;
 			if (this.damageTimer > 5) {
 				this.hasDamage = false;
+				this.damageTimer = 0;
 				this.flowRate = (float)(this.flowRate / 1.3);
 			}
 		}if (this.hasShield) {
@@ -438,25 +446,12 @@ public class FireTruck extends Entity{
 	}
 
 	private void addShield(){
-		if (this.getTexture() == Kroy.mainGameScreen.textures.getTruck(0)) {
-			this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(0));
-		} else if (this.getTexture() == Kroy.mainGameScreen.textures.getTruck(1)) {
-			this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(1));
-		} else if (this.getTexture() == Kroy.mainGameScreen.textures.getTruck(2)) {
-			this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(2));
-		} else if (this.getTexture() == Kroy.mainGameScreen.textures.getTruck(3)) {
-			this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(3));
-		}
+		this.setTexture(Kroy.mainGameScreen.textures.getShieldTruck(truckNum));
+		System.out.println(this.getTexture());
 	}
-	private void removeShield(){if (this.getTexture() == Kroy.mainGameScreen.textures.getShieldTruck(0)) {
-		this.setTexture(Kroy.mainGameScreen.textures.getTruck(0));
-	} else if (this.getTexture() == Kroy.mainGameScreen.textures.getShieldTruck(1)) {
-		this.setTexture(Kroy.mainGameScreen.textures.getTruck(1));
-	} else if (this.getTexture() == Kroy.mainGameScreen.textures.getShieldTruck(2)) {
-		this.setTexture(Kroy.mainGameScreen.textures.getTruck(2));
-	} else if (this.getTexture() == Kroy.mainGameScreen.textures.getShieldTruck(3)) {
-		this.setTexture(Kroy.mainGameScreen.textures.getTruck(3));
-	}}
+	private void removeShield(){
+		this.setTexture(Kroy.mainGameScreen.textures.getTruck(truckNum));
+	}
 
 
 	//ASSESSMENT 4 END

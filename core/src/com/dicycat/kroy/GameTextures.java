@@ -51,10 +51,10 @@ public class GameTextures {
 		trucks = new ArrayList<>(Arrays.asList(truck0, truck1, truck2, truck3));
 		// TRUCK_SELECT_CHANGE_2 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 		//ASSESSMENT 4 START
-		shieldtruck0 = new Texture(truckAddress[0]);
-		shieldtruck1 = new Texture(truckAddress[1]);
-		shieldtruck2 = new Texture(truckAddress[2]);
-		shieldtruck3 = new Texture(truckAddress[3]);
+		shieldtruck0 = new Texture(shieldTrucks[0]);
+		shieldtruck1 = new Texture(shieldTrucks[1]);
+		shieldtruck2 = new Texture(shieldTrucks[2]);
+		shieldtruck3 = new Texture(shieldTrucks[3]);
 		shieldTrucksList = new ArrayList<>(Arrays.asList(shieldtruck0, shieldtruck1, shieldtruck2, shieldtruck3));
 		//ASSESSMENT 4 END
 		ufo = new Texture("ufo.png");

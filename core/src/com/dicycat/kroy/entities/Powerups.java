@@ -23,6 +23,7 @@ public class Powerups extends Entity{
     //Checks if has collided with the player, if so calls the powerup method for the player
     private Boolean collision () {
         if (playerInRadius()) {
+            Kroy.mainGameScreen.getPlayer().powerup(type);
             this.exists = false;
             this.setTexture(new Texture ("blank.png"));
             this.timer = 0;
@@ -36,7 +37,7 @@ public class Powerups extends Entity{
     //Sets the type of power up
     private void setType() {
         Random r = new Random();
-        int typeNumber = r.nextInt(3);
+        int typeNumber = r.nextInt(4);
         switch(typeNumber){
             case 0:
                 this.type = "speed";
@@ -86,8 +87,8 @@ public class Powerups extends Entity{
     //Call this function
     public void update(float delta) {
         this.checkspawn(delta);
-        if (this.collision() && this.exists) {
-            Kroy.mainGameScreen.getPlayer().powerup(type);
+        if (this.exists) {
+            this.collision();
         }
     }
 
