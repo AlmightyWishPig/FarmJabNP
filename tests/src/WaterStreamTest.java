@@ -15,7 +15,7 @@ public class WaterStreamTest {
 
     @Before
     public void init() {
-        testWaterStream = new WaterStream(new Vector2(0, 0));
+        testWaterStream = new WaterStream(new Vector2(0, 0), "Blue.png");
     }
 
     /**

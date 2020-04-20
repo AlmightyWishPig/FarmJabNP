@@ -79,7 +79,7 @@ public class FireTruckTest {
     //Testing that moveInDirection changes the X position but not the Y when no collision when Direction set to E (270)
     @Test
     public void moveInDirectionShouldChangeXWhenNoCollisionAndDirectionSetToE() {
-        testTruck.setDirection(270);
+        testTruck.update(270);
         testTruck.setSelected(true);
         testTruck.moveInDirection();
 
@@ -106,7 +106,7 @@ public class FireTruckTest {
     //Testing that moveInDirection changes the X and Y position when no collision when Direction set to NE (270)
     @Test
     public void moveInDirectionShouldChangeXanadYWhenNoCollisionalDirectionSetToNE() {
-        testTruck.setDirection(315);
+        testTruck.update(315);
         testTruck.setSelected(true);
         testTruck.moveInDirection();
 
@@ -154,7 +154,7 @@ public class FireTruckTest {
         testTruck.setPosition(new Vector2(2903, 3211));
         testTruck.setSelected(true);
 
-        testTruck.update();
+        testTruck.update(0  );
         assertEquals(99f, testTruck.getCurrentWater(), 0.0f);
     }
 
@@ -168,7 +168,7 @@ public class FireTruckTest {
     @Test
     public void whenFireTruckNotInRangeToTargetItShouldNotAttack() {
         testTruck.setSelected(true);
-        testTruck.update();
+        testTruck.update(0);
 
         assertEquals(100f, testTruck.getCurrentWater(), 0.0f);
     }
@@ -202,9 +202,9 @@ public class FireTruckTest {
         testTruck.setSelected(true);
 
         //Lose 3 units of water
-        testTruck.update();
-        testTruck.update();
-        testTruck.update();
+        testTruck.update(0);
+        testTruck.update(0);
+        testTruck.update(0);
 
         testTruck.refillWater();
         assertEquals(100f, testTruck.getCurrentWater(), 0.0f);

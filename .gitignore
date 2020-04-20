@@ -200,3 +200,9 @@ tests/build/test-results/test/TEST-GameObjectTest.xml
 tests/build/reports/tests/test/classes/GameObjectTest.html
 tests/build/reports/tests/test/css/base-style.css
 *.xml
+tests/build/reports/tests/test/classes/AlienTest.html
+tests/build/tmp/test/jar_extract_15439581886376176976_tmp
+tests/build/tmp/test/jar_extract_4804983996143029629_tmp
+tests/build/tmp/test/jar_extract_5567446924852728741_tmp
+tests/build/tmp/test/jar_extract_6009824831593526738_tmp
+tests/build/tmp/test/jar_extract_9394653554034975632_tmp
