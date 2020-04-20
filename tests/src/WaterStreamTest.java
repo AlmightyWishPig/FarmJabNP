@@ -1,15 +1,11 @@
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.dicycat.kroy.GameObject;
-import com.dicycat.kroy.misc.StatBar;
 import com.dicycat.kroy.misc.WaterStream;
 import de.tomgrill.gdxtesting.GdxTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
 @RunWith(GdxTestRunner.class)
@@ -19,7 +15,7 @@ public class WaterStreamTest {
 
     @Before
     public void init() {
-        testWaterStream = new WaterStream(new Vector2(0, 0));
+        testWaterStream = new WaterStream(new Vector2(0, 0), "Blue.png");
     }
 
     /**

@@ -84,7 +84,7 @@ public class FireTruck extends Entity{
 	/**
 	 * This method moves the truck in the direction calculated in updateDirection()
 	 */
-	private void moveInDirection() {
+	public void moveInDirection() {
 
 		Vector2 movement = new Vector2(1,0); // movement represents where the truck is moving to. Initially set to (1,0) as this represents a unit vector
 
@@ -287,7 +287,7 @@ public class FireTruck extends Entity{
 	 * Added by Lucy Ivatt - NP STUDIOS
 	 */
 	// REPLENISH_1: OVER TIME -> INSTANT  - START OF MODIFICATION - NP STUDIOS - BETHANY GILMORE -----------------------------------------
-	void refillWater(){
+	public void refillWater(){
 		this.currentWater = this.maxWater;
 	}
 	// END OF MODIFICATION  - NP STUDIOS -----------------------------------------
@@ -300,7 +300,7 @@ public class FireTruck extends Entity{
 	 * Added by Lucy Ivatt - NP STUDIOS
 	 */
 	// Separated refilling water and fixing truck into 2 seperate methods as refilling the truck is now linked to the minigame
-	void repairTruck() {
+	public void repairTruck() {
 		if(!(healthPoints >= maxHealthPoints)){
 			healthPoints += 2;
 		}
