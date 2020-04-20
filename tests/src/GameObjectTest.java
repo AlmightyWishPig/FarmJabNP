@@ -6,8 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 
 //Mostly covered ~ calculate coverage (did not do all getters and setters since most are standard)
@@ -27,6 +27,7 @@ public class GameObjectTest {
         gameObjectTestZeros = new GameObjectTester(new Vector2(50, 50),
                 new Texture("../core/assets/fireTruck1.png"), new Vector2(0, 0));
     }
+
 
     /**
      * Test ID: GameObject_1.1
@@ -81,6 +82,12 @@ public class GameObjectTest {
         assertEquals(new Vector2(0, 0), gameObjectTestZeros.getCentre());
     }
 
+    /**
+     * Test ID: GameObject_1.5
+     *
+     * Input: New position of positive standard numbers - (500, 500)
+     * Expected Output: The new position of GameObject to be what is set
+     */
     //Testing that .setPosition() accepts standard values and changes accordingly
     @Test
     public void setPositionShouldChangeGameObjectsPositionStandard() {
@@ -90,6 +97,12 @@ public class GameObjectTest {
         assertEquals(new Vector2(500, 500), gameObjectTest.getPosition());
     }
 
+    /**
+     * Test ID: GameObject_1.6
+     *
+     * Input: New position of two negative numbers - (-10, -10)
+     * Expected Output: The new position of GameObject to be what is set
+     */
     //Testing that .setPosition() accepts negative values and changes accordingly
     @Test
     public void setPositionShouldSetToNegativePosition() {
@@ -99,6 +112,12 @@ public class GameObjectTest {
         assertEquals(new Vector2(-10, -10), gameObjectTest.getPosition());
     }
 
+    /**
+     * Test ID: GameObject_1.7
+     *
+     * Input: changePosition with input of standard standard positive numbers
+     * Expected Output: The position before changePosition plus the values passed
+     */
     //Testing that .changePosition() changes correctly with standard values (.changePosition changes current position by
     // vector v)
     @Test
@@ -112,6 +131,12 @@ public class GameObjectTest {
         assertEquals(new Vector2(150, 150), gameObjectTest.getPosition());
     }
 
+    /**
+     * Test ID: GameObject_1.8
+     *
+     * Input: changePosition with input of negative numbers
+     * Expected Output: The position before changePosition plus the values passed
+     */
     //Testing that .changePosition() changes correctly with an all negative vector input
     @Test
     public void changePositionShouldShiftWithNegativeVector() {
@@ -124,6 +149,12 @@ public class GameObjectTest {
         assertEquals(new Vector2(25, 25), gameObjectTest.getPosition());
     }
 
+    /**
+     * Test ID: GameObject_1.9
+     *
+     * Input: changePosition with input of one positive and one negative number
+     * Expected Output: The position before changePosition plus the values passed
+     */
     //Testing that .changePosition() changes correctly with one part of the vector being negative
     @Test
     public void changePositionShouldShiftWithOneNegativeNumberVector() {
@@ -141,11 +172,14 @@ public class GameObjectTest {
 
 class GameObjectTester extends GameObject {
 
-    GameObjectTester(Vector2 spawnPos, Texture image, Vector2 imSize) {
+    public GameObjectTester(Vector2 spawnPos, Texture image, Vector2 imSize) {
         super(spawnPos, image, imSize);
     }
 
     @Override
     public void update(float delta) {
+
     }
+
+
 }
