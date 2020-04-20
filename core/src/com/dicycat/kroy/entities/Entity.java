@@ -89,7 +89,7 @@ public abstract class Entity extends GameObject{
 	public void saveEntity(File saveFile){
 		try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(saveFile,true))) {
 			//Stats that are specific to a FireTruck
-			if (this instanceof  FireTruck){
+			if (this instanceof FireTruck){
 				fileWriter.write(Float.toString(((FireTruck) this).getCurrentWater()));
 				fileWriter.write("\n");
 				fileWriter.write(Float.toString(((FireTruck) this).getSpeedTimer()));

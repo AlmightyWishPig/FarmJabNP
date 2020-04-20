@@ -6,7 +6,6 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -19,10 +18,7 @@ import com.dicycat.kroy.GameObject;
 import com.dicycat.kroy.GameTextures;
 import com.dicycat.kroy.Kroy;
 import com.dicycat.kroy.bullets.Bullet;
-import com.dicycat.kroy.debug.DebugCircle;
 import com.dicycat.kroy.debug.DebugDraw;
-import com.dicycat.kroy.debug.DebugLine;
-import com.dicycat.kroy.debug.DebugRect;
 import com.dicycat.kroy.entities.*;
 import com.dicycat.kroy.gamemap.TiledGameMap;
 import com.dicycat.kroy.minigame.Minigame;
@@ -30,9 +26,8 @@ import com.dicycat.kroy.scenes.FireTruckSelectionScene;
 import com.dicycat.kroy.scenes.HUD;
 import com.dicycat.kroy.scenes.OptionsWindow;
 import com.dicycat.kroy.scenes.PauseWindow;
-
-import static com.badlogic.gdx.Gdx.graphics;
 import static com.dicycat.kroy.screens.MenuScreen.loadFile;
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 
@@ -72,6 +67,9 @@ public class GameScreen implements Screen{
 	List<GameObject> toRender = new ArrayList<>(); //Allows removed objects to be rendered
 
 	private File saveFile; // Allows saving a single gamefile
+
+	private List<Fortress> fortresses; //List of all Fortresses
+	private List<Alien> patrols; //List of all Patrols
 	//ASSESSMENT 4 END
 
 	private HUD hud;
@@ -101,6 +99,7 @@ public class GameScreen implements Screen{
 	private List<GameObject> objectsToAdd;
 	private List<DebugDraw> debugObjects; //List of debug items
 
+
 	// TRUCK_SELECT_CHANGE_12 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	// Removed truckNum from constructor parameters
 	public GameScreen(Kroy _game) {
@@ -126,6 +125,11 @@ public class GameScreen implements Screen{
 		hud = new HUD(game.batch, gameTimer);
 		players = new ArrayList<>(); // Initialise the array which will contain the 4 fire trucks
 
+		//ASSESSMENT 4 START
+		fortresses = new ArrayList<>();
+		patrols = new ArrayList<>();
+		//ASSESSMENT 4 END
+
 	}
 	// TRUCK_SELECT_CHANGE_12 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 
@@ -145,44 +149,49 @@ public class GameScreen implements Screen{
 		players.add(new FireTruck(new Vector2(spawnPosition.x, spawnPosition.y), truckStats[2], 2));
 		players.add(new FireTruck(new Vector2(spawnPosition.x, spawnPosition.y - 50), truckStats[3], 3));
 
-		// Iterates through the players array lists and adds them to gameObjects.
-		//Player
-		gameObjects.addAll(players);
+		//ASSESSMENT 4 START
+		//Fortresses are now added to their own list before other gameObjects
+		fortresses.add(new Fortress(new Vector2(2903,3211),textures.getFortress(0), textures.getDeadFortress(0),
+				new Vector2(256, 218), 400, 5));
+		fortresses.add(new Fortress(new Vector2(3200,5681), textures.getFortress(1), textures.getDeadFortress(1),
+				new Vector2(256, 320), 500, 10));
+		fortresses.add(new Fortress(new Vector2(2050,1937), textures.getFortress(2), textures.getDeadFortress(2),
+				new Vector2(400, 240), 600, 15));
+		fortresses.add(new Fortress(new Vector2(4496,960), textures.getFortress(3), textures.getDeadFortress(3),
+				new Vector2(345, 213), 700, 20));
+		fortresses.add(new Fortress(new Vector2(6112,1100), textures.getFortress(4), textures.getDeadFortress(4),
+				new Vector2(300, 240), 800, 25)); //382, 319
+		fortresses.add(new Fortress(new Vector2(600,4000), textures.getFortress(5), textures.getDeadFortress(5),
+				new Vector2(300, 270), 900, 30)); //45, 166
+		//ASSESSMENT 4 END
+
 
 		// Sets initial camera position to the active truck's position (set to arbitrary truck at the beginning of the game)
 		gamecam.translate(new Vector2(players.get(activeTruck).getX(),players.get(activeTruck).getY())); // sets initial Camera position
 		// TRUCK_SELECT_CHANGE_13 - END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
-
-		gameObjects.add(new FireStation());
 
 		// PATROLS_3 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT ------------
 		// Creates the aliens for the patrols and adds them to gameObjects so they can be updated each tick
 		int timeBetween = 50;
 		for (int patrolNum = 1; patrolNum <=4; patrolNum++)
 		for (int i = 0; i < 5; i++) {
-			gameObjects.add(new Alien(patrolNum, i * timeBetween, 300));
+			patrols.add(new Alien(patrolNum, i * timeBetween, 300)); //ASSESSMENT 4 Now adds to patrols rather than to gameObjects
 		}
 		// PATROLS_4 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT ------------
 
+		//ASSESSMENT 4 START
+		// Iterates through the loadable object lists
+		gameObjects.addAll(players);
+		gameObjects.addAll(fortresses);
+		gameObjects.addAll(patrols);
+		//ASSESSMENT 4 END
 
+		if (loadFile != 0){
+			loadGame(loadFile);
 
-		// FORTRESS_HEALTH_1 - START OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE ----
-		// Added health and damage values for each fortress instantiation
-		// Added new fortresses and set position in accordance with collisions on tiled map
-		gameObjects.add(new Fortress(new Vector2(2903,3211),textures.getFortress(0), textures.getDeadFortress(0),
-				new Vector2(256, 218), 400, 5));
-		gameObjects.add(new Fortress(new Vector2(3200,5681), textures.getFortress(1), textures.getDeadFortress(1),
-				new Vector2(256, 320), 500, 10));
-		gameObjects.add(new Fortress(new Vector2(2050,1937), textures.getFortress(2), textures.getDeadFortress(2),
-				new Vector2(400, 240), 600, 15));
-		gameObjects.add(new Fortress(new Vector2(4496,960), textures.getFortress(3), textures.getDeadFortress(3),
-				new Vector2(345, 213), 700, 20));
-		gameObjects.add(new Fortress(new Vector2(6112,1100), textures.getFortress(4), textures.getDeadFortress(4),
-				new Vector2(300, 240), 800, 25)); //382, 319
-		gameObjects.add(new Fortress(new Vector2(600,4000), textures.getFortress(5), textures.getDeadFortress(5),
-				new Vector2(300, 270), 900, 30)); //45, 166
-		// FORTRESS_HEALTH_1 & NEW_FORTRESSES_2 - END OF MODIFICATION - NP STUDIOS - CASSANDRA LILLYSTONE  & ALASDAIR PILMORE-BEDFORD
+		}
 
+		gameObjects.add(new FireStation());
 		//ASSESSMENT 4 START
 		gameObjects.add(new Powerups(new Vector2(4198,3798))); //Co-ords are in the form (x*16 - 3,(399-y)*16 - 2) where (x,y) is from Tiled
 		gameObjects.add(new Powerups(new Vector2(901,4726)));  //
@@ -192,10 +201,6 @@ public class GameScreen implements Screen{
 		gameObjects.add(new Powerups(new Vector2(1478,2022))); //
 		gameObjects.add(new Powerups(new Vector2(5461,1286))); //
 		//ASSESSMENT 4 END
-
-		if (loadFile != 0){
-			loadGame(loadFile);
-		}
 	}
 
 	/**
@@ -378,56 +383,9 @@ public class GameScreen implements Screen{
 		debugObjects.clear();
 	}
 
-	/**
-	 * Draw a debug line
-	 * @param start Start of the line
-	 * @param end End of the line
-	 * @param lineWidth Width of the line
-	 * @param colour Colour of the line
-	 */
-	public void DrawLine(Vector2 start, Vector2 end, int lineWidth, Color colour) {
-		// MEMORY LEAK FIX 2 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT
-		// Added an if statement to fully ensure debugging view is requested as we noticed the original teams debug
-		// code causes a memory leak and possibly crashes the game overtime.
-		if (showDebug) {
-			debugObjects.add(new DebugLine(start, end, lineWidth, colour));
-		}
-		// END OF MODIFICATION - NP STUDIOS -----------------------------------------
-	}
-
-	/**
-	 * Draw a debug circle (outline)
-	 * @param position Centre of the circle
-	 * @param radius Radius of the circle
-	 * @param lineWidth Width of the outline
-	 * @param colour Colour of the line
-	 */
-	public void DrawCircle(Vector2 position, float radius, int lineWidth, Color colour) {
-		// MEMORY LEAK FIX 3 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT
-		// Added an if statement to fully ensure debugging view is requested as we noticed the original teams debug
-		// code causes a memory leak and possibly crashes the game overtime.
-		if (showDebug) {
-			debugObjects.add(new DebugCircle(position, radius, lineWidth, colour));
-		}
-		// END OF MODIFICATION - NP STUDIOS -----------------------------------------
-	}
-
-	/**
-	 * Draw a debug rectangle (outline)
-	 * @param bottomLeft Bottom left point of the rectangle
-	 * @param dimensions Dimensions of the rectangle (Width, Length)
-	 * @param lineWidth Width of the outline
-	 * @param colour Colour of the line
-	 */
-	public void DrawRect(Vector2 bottomLeft, Vector2 dimensions, int lineWidth, Color colour) {
-		// MEMORY LEAK FIX 4 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT
-		// Added an if statement to fully ensure debugging view is requested as we noticed the original teams debug
-		// code causes a memory leak and possibly crashes the game overtime.
-		if (showDebug) {
-			debugObjects.add(new DebugRect(bottomLeft, dimensions, lineWidth, colour));
-		}
-		// END OF MODIFICATION - NP STUDIOS -----------------------------------------
-	}
+	//ASSESSMENT 4 START
+	//Removed unused debug code
+	//ASSESSMENT 4 END
 
 	/**
 	 * Updates the position of the camera to have the truck centre
@@ -594,13 +552,22 @@ public class GameScreen implements Screen{
 				fileWriter.write("\n");
 				fileWriter.write(Integer.toString(activeTruck));
 				fileWriter.write("\n");
-				fileWriter.write(Integer.toString(fortressesCount));
+				fileWriter.write(Float.toString(gameTimer));
+				fileWriter.write("\n");
+				fileWriter.write(Integer.toString(hud.getFinalScore()));
 				fileWriter.write("\n");
 				fileWriter.close();
+				for (FireTruck sObject : players) {
+						sObject.saveEntity(saveFile);
+				}
+				for (Fortress sObject : fortresses) {
+					sObject.saveEntity(saveFile);
+				}
+				for( Alien sObject : patrols) {
+					sObject.saveEntity(saveFile);
+				}
 				for (GameObject sObject : gameObjects) {
-					if (sObject instanceof Entity) {    //Only entities and bullets can change so only they are saved
-						((Entity) sObject).saveEntity(saveFile);
-					} else if (sObject instanceof Bullet) {
+					if (sObject instanceof Bullet) {
 						((Bullet) sObject).saveBullet(saveFile);
 					}
 				}
@@ -618,6 +585,8 @@ public class GameScreen implements Screen{
 			BufferedReader reader = new BufferedReader(new FileReader(saveFile));
 			FireTruckSelectionScene.difficulty = parseInt(reader.readLine());
 			activeTruck = parseInt(reader.readLine());
+			gameTimer = parseFloat(reader.readLine());
+			hud.updateScore(parseInt(reader.readLine()));
 			while ((line = reader.readLine()) != null) {
 				saveInfo.add(line);
 			}
@@ -636,22 +605,22 @@ public class GameScreen implements Screen{
 	private int loadBullet(ArrayList<String> saveInfo, int lineNo){
 		int speed = Integer.parseInt(saveInfo.get(lineNo));
 		lineNo ++;
-		float maxdist = Float.parseFloat(saveInfo.get(lineNo));
+		float maxdist = parseFloat(saveInfo.get(lineNo));
 		lineNo ++;
-		float traveldist = Float.parseFloat(saveInfo.get(lineNo));
+		float traveldist = parseFloat(saveInfo.get(lineNo));
 		lineNo ++;
 		int bulletDamage = Integer.parseInt(saveInfo.get(lineNo));
 		lineNo ++;
-		float xvel = Float.parseFloat(saveInfo.get(lineNo));
+		float xvel = parseFloat(saveInfo.get(lineNo));
 		lineNo++;
-		float yvel = Float.parseFloat(saveInfo.get(lineNo));
+		float yvel = parseFloat(saveInfo.get(lineNo));
 		lineNo++;
-		float x = Float.parseFloat(saveInfo.get(lineNo));
+		float x = parseFloat(saveInfo.get(lineNo));
 		lineNo++;
-		float y = Float.parseFloat(saveInfo.get(lineNo));
+		float y = parseFloat(saveInfo.get(lineNo));
 		lineNo++;
-		Bullet bullet = new Bullet(new Vector2 (x,y), new Vector2 (xvel,yvel),  speed, (maxdist - traveldist), bulletDamage);
-		Kroy.mainGameScreen.addGameObject(bullet);
+		//Bullet bullet = new Bullet(new Vector2 (x,y), new Vector2 (xvel,yvel),  speed, (maxdist - traveldist), bulletDamage);
+		//Kroy.mainGameScreen.addGameObject(bullet);
 		return lineNo;
 	}
 
