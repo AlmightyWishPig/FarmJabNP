@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.dicycat.kroy.scenes.FireTruckSelectionScene.difficulty;
 
@@ -87,62 +86,70 @@ public abstract class Entity extends GameObject{
 
 	//ASSESSMENT 4 START
 	public void saveEntity(File saveFile){
-		try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(saveFile,true))) {
-			//Stats that are specific to a FireTruck
-			if (this instanceof FireTruck){
-				fileWriter.write(Float.toString(((FireTruck) this).getCurrentWater()));
+		if (this instanceof Powerups){
+			((Powerups) this).savePowerup(saveFile);
+		} else {
+			try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter(saveFile, true))) {
+				//Stats that are specific to a FireTruck
+				if (this instanceof FireTruck) {
+					fileWriter.write(Float.toString(((FireTruck) this).getCurrentWater()));
+					fileWriter.write("\n");
+					fileWriter.write(Float.toString(((FireTruck) this).getSpeedTimer()));
+					fileWriter.write("\n");
+					fileWriter.write(Float.toString(((FireTruck) this).getShieldTimer()));
+					fileWriter.write("\n");
+					fileWriter.write(Float.toString(((FireTruck) this).getDamageTimer()));
+					fileWriter.write("\n");
+				} else if (this instanceof Alien) {
+					fileWriter.write(Integer.toString(((Alien) this).getCurrentWaypoint()));
+					fileWriter.write("\n");
+					fileWriter.write(Float.toString(((Alien) this).getMovementCountdown() + Gdx.graphics.getDeltaTime()));
+					fileWriter.write("\n");
+				}
+				fileWriter.write(Integer.toString(healthPoints));
 				fileWriter.write("\n");
-				fileWriter.write(Float.toString(((FireTruck) this).getSpeedTimer()));
+				fileWriter.write(Boolean.toString(this.isRemove()));
 				fileWriter.write("\n");
-				fileWriter.write(Float.toString(((FireTruck) this).getShieldTimer()));
+				fileWriter.write(Float.toString(this.getPosition().x));
 				fileWriter.write("\n");
-				fileWriter.write(Float.toString(((FireTruck) this).getDamageTimer()));
+				fileWriter.write(Float.toString(this.getPosition().y));
 				fileWriter.write("\n");
-			} else if (this instanceof Alien) {
-				fileWriter.write(Integer.toString(((Alien) this).getCurrentWaypoint()));
-				fileWriter.write("\n");
-				fileWriter.write(Float.toString(((Alien) this).getMovementCountdown() + Gdx.graphics.getDeltaTime()));
-				fileWriter.write("\n");
+			} catch (IOException e) {
+				Gdx.app.error("Save", "Could not access file", e);
 			}
-			fileWriter.write(Integer.toString(healthPoints));
-			fileWriter.write("\n");
-			fileWriter.write(Boolean.toString(this.isRemove()));
-			fileWriter.write("\n");
-			fileWriter.write(Float.toString(this.getPosition().x));
-			fileWriter.write("\n");
-			fileWriter.write(Float.toString(this.getPosition().y));
-			fileWriter.write("\n");
-
-		} catch (IOException e) {
-			Gdx.app.error("Save", "Could not access file", e);
 		}
 	}
 
 	public int loadEntity(ArrayList<String> saveInfo, int lineNo) {
-		if (this instanceof FireTruck){
-			((FireTruck)this).setCurrentWater(Float.parseFloat(saveInfo.get(lineNo)));
+		if (this instanceof Powerups) {
+			((Powerups) this).loadPowerup(saveInfo, lineNo);
+			lineNo += 2;
+		} else {
+			if (this instanceof FireTruck) {
+				((FireTruck) this).setCurrentWater(Float.parseFloat(saveInfo.get(lineNo)));
+				lineNo++;
+				((FireTruck) this).setSpeedTimer(Float.parseFloat(saveInfo.get(lineNo)));
+				lineNo++;
+				((FireTruck) this).setShieldTimer(Float.parseFloat(saveInfo.get(lineNo)));
+				lineNo++;
+				((FireTruck) this).setDamageTimer(Float.parseFloat(saveInfo.get(lineNo)));
+				lineNo++;
+			} else if (this instanceof Alien) {
+				((Alien) this).setCurrentWaypoint(Integer.parseInt(saveInfo.get(lineNo)));
+				lineNo++;
+				((Alien) this).setMovementCountdown(Float.parseFloat(saveInfo.get(lineNo)));
+				lineNo++;
+			}
+			this.healthPoints = Integer.parseInt(saveInfo.get(lineNo));
 			lineNo++;
-			((FireTruck)this).setSpeedTimer(Float.parseFloat(saveInfo.get(lineNo)));
+			this.setRemove(Boolean.parseBoolean(saveInfo.get(lineNo)));
 			lineNo++;
-			((FireTruck)this).setShieldTimer(Float.parseFloat(saveInfo.get(lineNo)));
+			float x = Float.parseFloat(saveInfo.get(lineNo));
 			lineNo++;
-			((FireTruck)this).setDamageTimer(Float.parseFloat(saveInfo.get(lineNo)));
-			lineNo++;
-		} else if (this instanceof Alien) {
-			((Alien)this).setCurrentWaypoint(Integer.parseInt(saveInfo.get(lineNo)));
-			lineNo++;
-			((Alien)this).setMovementCountdown(Float.parseFloat(saveInfo.get(lineNo)));
-			lineNo++;
+			float y = Float.parseFloat(saveInfo.get(lineNo));
+			lineNo++; //Ensures the next call will read from the next line onwards
+			this.setPosition(new Vector2(x, y));
 		}
-		this.healthPoints = Integer.parseInt(saveInfo.get(lineNo));
-		lineNo++;
-		this.setRemove(Boolean.parseBoolean(saveInfo.get(lineNo)));
-		lineNo++;
-		float x = Float.parseFloat(saveInfo.get(lineNo));
-		lineNo++;
-		float y = Float.parseFloat(saveInfo.get(lineNo));
-		lineNo++; //Ensures the next call will read from the next line onwards
-		this.setPosition(new Vector2(x,y));
 		return (lineNo);
 	}
 	//ASSESSMENT 4 END

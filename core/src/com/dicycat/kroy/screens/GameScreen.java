@@ -70,6 +70,7 @@ public class GameScreen implements Screen{
 
 	private List<Fortress> fortresses; //List of all Fortresses
 	private List<Alien> patrols; //List of all Patrols
+	private List<Powerups> powerups; //List of all Powerups
 	//ASSESSMENT 4 END
 
 	private HUD hud;
@@ -128,6 +129,7 @@ public class GameScreen implements Screen{
 		//ASSESSMENT 4 START
 		fortresses = new ArrayList<>();
 		patrols = new ArrayList<>();
+		powerups = new ArrayList<>();
 		//ASSESSMENT 4 END
 
 	}
@@ -180,10 +182,21 @@ public class GameScreen implements Screen{
 		// PATROLS_4 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT ------------
 
 		//ASSESSMENT 4 START
+		powerups.add(new Powerups(new Vector2(4198,3798))); //Co-ords are in the form (x*16 - 3,(399-y)*16 - 2) where (x,y) is from Tiled
+		powerups.add(new Powerups(new Vector2(901,4726)));  //
+		powerups.add(new Powerups(new Vector2(4085,5510))); //
+		powerups.add(new Powerups(new Vector2(3334,2630))); //
+		powerups.add(new Powerups(new Vector2(6629,2518))); //
+		powerups.add(new Powerups(new Vector2(1478,2022))); //
+		powerups.add(new Powerups(new Vector2(5461,1286))); //
+		//ASSESSMENT 4 END
+
+		//ASSESSMENT 4 START
 		// Iterates through the loadable object lists
 		gameObjects.addAll(players);
 		gameObjects.addAll(fortresses);
 		gameObjects.addAll(patrols);
+		gameObjects.addAll(powerups);
 		//ASSESSMENT 4 END
 
 		if (loadFile != 0){
@@ -192,15 +205,6 @@ public class GameScreen implements Screen{
 		}
 
 		gameObjects.add(new FireStation());
-		//ASSESSMENT 4 START
-		gameObjects.add(new Powerups(new Vector2(4198,3798))); //Co-ords are in the form (x*16 - 3,(399-y)*16 - 2) where (x,y) is from Tiled
-		gameObjects.add(new Powerups(new Vector2(901,4726)));  //
-		gameObjects.add(new Powerups(new Vector2(4085,5510))); //
-		gameObjects.add(new Powerups(new Vector2(3334,2630))); //
-		gameObjects.add(new Powerups(new Vector2(6629,2518))); //
-		gameObjects.add(new Powerups(new Vector2(1478,2022))); //
-		gameObjects.add(new Powerups(new Vector2(5461,1286))); //
-		//ASSESSMENT 4 END
 	}
 
 	/**
@@ -564,6 +568,9 @@ public class GameScreen implements Screen{
 					sObject.saveEntity(saveFile);
 				}
 				for( Alien sObject : patrols) {
+					sObject.saveEntity(saveFile);
+				}
+				for (Powerups sObject: powerups) {
 					sObject.saveEntity(saveFile);
 				}
 				for (GameObject sObject : gameObjects) {

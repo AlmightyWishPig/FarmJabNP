@@ -1,18 +1,26 @@
 //Assessment 4 START
 package com.dicycat.kroy.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.Kroy;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 
 public class Powerups extends Entity{
 
     private String type;
-    private Boolean exists;
+    private Boolean exists = false;
     private float timer;
     private int respawnTimer;
+    private int typeNumber = 0;
     public Powerups(Vector2 pos){
         super(pos,  new Texture("speed.png"), new Vector2(20,20), 1000000, 25);
         this.setType();
@@ -21,15 +29,12 @@ public class Powerups extends Entity{
     }
 
     //Checks if has collided with the player, if so calls the powerup method for the player
-    private Boolean collision () {
+    private void collision () {
         if (playerInRadius()) {
             Kroy.mainGameScreen.getPlayer().powerup(type);
             this.exists = false;
             this.setTexture(new Texture ("blank.png"));
             this.timer = 0;
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -37,21 +42,32 @@ public class Powerups extends Entity{
     //Sets the type of power up
     private void setType() {
         Random r = new Random();
-        int typeNumber = r.nextInt(4);
+        typeNumber = r.nextInt(4);
+        if (!exists) {
+            defineType(typeNumber);
+        }
+    }
+
+    //Sets stats based on the TypeNumber
+    private void defineType(int typeNumber){
         switch(typeNumber){
             case 0:
+                this.exists = true;
                 this.type = "speed";
                 this.setTexture(new Texture("speed.png"));
                 break;
             case 1:
+                this.exists = true;
                 this.type = "damage";
                 this.setTexture(new Texture("damage.png"));
                 break;
             case 2:
+                this.exists = true;
                 this.type = "shield";
                 this.setTexture(new Texture("shield.png"));
                 break;
             case 3:
+                this.exists = true;
                 this.type = "refill";
                 this.setTexture(new Texture("refill.png"));
                 break;
@@ -81,7 +97,6 @@ public class Powerups extends Entity{
     private void respawn() {
         this.setType();
         this.setRespawnTimer();
-        this.exists = true;
     }
 
     //Call this function
@@ -94,6 +109,24 @@ public class Powerups extends Entity{
 
     public boolean getExists(){
         return this.exists;
+    }
+
+    public void loadPowerup(ArrayList<String> saveInfo, int lineNo ) {
+        exists = Boolean.parseBoolean(saveInfo.get(lineNo));
+        if (exists) {
+            defineType(Integer.parseInt(saveInfo.get(lineNo + 1)));
+        }
+    }
+
+    public void savePowerup(File saveFile){
+        try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(saveFile,true))) {
+            fileWriter.write(Boolean.toString(this.exists));
+            fileWriter.write("\n");
+            fileWriter.write(Integer.toString(this.typeNumber));
+            fileWriter.write("\n");
+        } catch (IOException e) {
+            Gdx.app.error("Save", "Could not access file", e);
+        }
     }
 }
 //Assessment 4 END
