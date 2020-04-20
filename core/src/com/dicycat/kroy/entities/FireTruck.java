@@ -24,13 +24,13 @@ import com.dicycat.kroy.screens.GameScreen;
 public class FireTruck extends Entity{
 	private float speed;	//How fast the truck can move
 	private float flowRate;	//How fast the truck can dispense water
-	private float maxWater; //How much water the truck can hold
+	private final float maxWater; //How much water the truck can hold
 	private float currentWater; //Current amount of water
 	// TRUCK_SELECT_CHANGE_5- START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	private boolean selected; // Added boolean to say whether or not the truck is selected
 	// TRUCK_SELECT_CHANGE_5- END OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 
-	private Rectangle hitbox = new Rectangle(20, 45, 20, 20);
+	private final Rectangle hitbox = new Rectangle(20, 45, 20, 20);
 
 	private final HashMap<String,Integer> DIRECTIONS = new HashMap<String,Integer>(); // Dictionary to store the possible directions the truck can face based on a key code created later
 	private Integer direction = 0; // Direction the truck is facing
