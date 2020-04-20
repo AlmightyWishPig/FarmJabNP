@@ -126,17 +126,26 @@ public class Bullet extends GameObject {
 	//ASSESSMENT 4 START
 	public void saveBullet(File saveFile){
 		try(BufferedWriter fileWriter = new BufferedWriter(new FileWriter(saveFile,true))) {
-			fileWriter.write("Bullet"); //For debugging
-			fileWriter.write("\n");
-			fileWriter.write(Integer.toString(speed));
-			fileWriter.write("\n");
-			fileWriter.write(Float.toString(maxDist));
-			fileWriter.write("\n");
-			fileWriter.write(Float.toString(travelDist));
-			fileWriter.write("\n");
-			fileWriter.close();
+			if (!isRemove()) {
+				fileWriter.write(String.valueOf(speed));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(maxDist));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(travelDist));
+				fileWriter.write("\n");
+				fileWriter.write(String.valueOf(bulletDamage));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(this.velocity.x));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(this.velocity.y));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(this.getPosition().x));
+				fileWriter.write("\n");
+				fileWriter.write(Float.toString(this.getPosition().y));
+				fileWriter.write("\n");
+			}
 		} catch (IOException e) {
-			//This is required for fileWriter however it should not be possible to fail at this stage
+			Gdx.app.error("Save", "Could not access file", e);
 		}
 	}
 	//ASSESSMENT 4 END

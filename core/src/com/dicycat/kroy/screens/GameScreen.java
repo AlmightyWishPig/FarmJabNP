@@ -604,7 +604,7 @@ public class GameScreen implements Screen{
 						((Bullet) sObject).saveBullet(saveFile);
 					}
 				}
-			} catch (IOException e) {}
+			} catch (IOException e) {Gdx.app.error("Save", "Could not access file", e);}
 		}
 	}
 
@@ -624,10 +624,36 @@ public class GameScreen implements Screen{
 			for (GameObject object : gameObjects) {
 				lineNo = ((Entity) object).loadEntity(saveInfo, lineNo);
 			}
+			while (lineNo < saveInfo.size()) { //Loads bullets from the remaining file
+				lineNo = loadBullet(saveInfo, lineNo);
+			}
 			reader.close();
 	}
-		catch (FileNotFoundException exception) { }
-		catch (IOException e) { }
+		catch (FileNotFoundException exception) {Gdx.app.error("Load", "No save file to load", exception); } //If the game has not been saved then will start a normal game with no intro screen
+		catch (IOException e) { Gdx.app.error("Load", "Could not access file", e);}
 	}
+
+	private int loadBullet(ArrayList<String> saveInfo, int lineNo){
+		int speed = Integer.parseInt(saveInfo.get(lineNo));
+		lineNo ++;
+		float maxdist = Float.parseFloat(saveInfo.get(lineNo));
+		lineNo ++;
+		float traveldist = Float.parseFloat(saveInfo.get(lineNo));
+		lineNo ++;
+		int bulletDamage = Integer.parseInt(saveInfo.get(lineNo));
+		lineNo ++;
+		float xvel = Float.parseFloat(saveInfo.get(lineNo));
+		lineNo++;
+		float yvel = Float.parseFloat(saveInfo.get(lineNo));
+		lineNo++;
+		float x = Float.parseFloat(saveInfo.get(lineNo));
+		lineNo++;
+		float y = Float.parseFloat(saveInfo.get(lineNo));
+		lineNo++;
+		Bullet bullet = new Bullet(new Vector2 (x,y), new Vector2 (xvel,yvel),  speed, (maxdist - traveldist), bulletDamage);
+		Kroy.mainGameScreen.addGameObject(bullet);
+		return lineNo;
+	}
+
 	//ASSESSMENT 4 END
 }

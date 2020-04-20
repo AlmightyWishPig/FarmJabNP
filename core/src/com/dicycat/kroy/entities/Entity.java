@@ -112,10 +112,9 @@ public abstract class Entity extends GameObject{
 			fileWriter.write("\n");
 			fileWriter.write(Float.toString(this.getPosition().y));
 			fileWriter.write("\n");
-			fileWriter.close();
 
 		} catch (IOException e) {
-
+			Gdx.app.error("Save", "Could not access file", e);
 		}
 	}
 
