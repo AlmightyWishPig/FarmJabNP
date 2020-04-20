@@ -30,7 +30,10 @@ public class ControlsWindow {
 	public Stage stage;
 	public Table table = new Table();
 	private SpriteBatch sb;
-	private NinePatch patch = new NinePatch(new Texture("loool.jpg"), 3, 3, 3, 3);   // splits texture into nine 'patches' and gives a border of 3 pixels wide/tall on (texture,left,right,top,bottom)
+	//ASSESSMENT 4 START
+	//Removed all instances of "loool.png"
+	private NinePatch patch = new NinePatch(new Texture("controlsbackground.jpg"), 3, 3, 3, 3);   // splits texture into nine 'patches' and gives a border of 3 pixels wide/tall on (texture,left,right,top,bottom)
+	//ASSESSMENT 4 END
 	private NinePatchDrawable background = new NinePatchDrawable(patch);
 	
 	private Skin skin = new Skin(Gdx.files.internal("uiskin.json")); 
@@ -84,53 +87,17 @@ public class ControlsWindow {
 		
 	}
 
+
+	//ASSESSMENT 4 START
+	//Controls screen is now done by editing a .png file rather than a table
 	/**
 	 *  Sets the layout for the controls screen
 	 */
 	private void formatControlsScreen() {
 		table.setBackground(background);
-		table.add(new Image(new Texture("pkey.png")));
-		table.add(new Image(new Texture("esckey.png")));
-		table.add(new Image(new Texture("mkey.png")));
-		table.add(blank);
-		table.add(pause);
-		table.row();
-		table.add(new Image(new Texture("up.png")));
-		table.add(blank);
-		table.add(blank);
-		table.add(blank);
-		table.add(up);
-		table.row();
-		table.add(new Image(new Texture("left.png")));
-		table.add(blank);
-		table.add(blank);
-		table.add(blank);
-		table.add(left);
-		table.row();
-		table.add(new Image(new Texture("down.png")));
-		table.add(blank);
-		table.add(blank);
-		table.add(blank);
-		table.add(down);
-		table.row();
-		table.add(new Image(new Texture("right.png")));
-		table.add(blank);
-		table.add(blank);
-		table.add(blank);
-		table.add(right);
-		table.row();
-		table.add(new Image(new Texture("1key.png")));
-		table.add(new Image(new Texture("2key.png")));
-		table.add(new Image(new Texture("3key.png")));
-		table.add(new Image(new Texture("4key.png")));
-		table.add(select);
-		table.row();
-		table.add(blank);
-		table.row();
-		table.add(blank);
-		table.add(blank);
-		table.add(blank);
-		table.add(blank);
+		table.add(blank).fillY().height(600); //Aligns the back button
+		table.row().fillY();
 		table.add(back).width(centre/3.0f);
 	}
+	//ASSESSMENT 4 END
 }
