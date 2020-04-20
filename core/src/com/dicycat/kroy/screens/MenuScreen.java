@@ -227,7 +227,10 @@ public class MenuScreen implements Screen{
 			  // MINIGAME_IMPLEMENTATION_1 - START OF MODIFICATION - NP STUDIOS - BETHANY GILMORE
 			  Button minigameButton = new Button(minigameButtonY, minigameButtonTexture, minigameButtonActiveTexture, game);
 			  if (minigameButton.buttonAction()) {
+			  	  //ASSESSMENT 4 START
+				  //Creates a new instance of the minigame to play it multiple times without reloading the game
 				  minigame = new Minigame(game, false);
+				  // ASSESSMENT 4 END
 				  minigame.visibility(true);
 				  setGameState(MenuScreenState.MINIGAME);
 			  // MINIGAME_IMPLEMENTATION_1 - END OF MODIFICATION - NP STUDIOS - BETHANY GILMORE
