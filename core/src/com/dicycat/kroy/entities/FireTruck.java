@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.GameObject;
-import com.dicycat.kroy.GameTextures;
 import com.dicycat.kroy.Kroy;
 import com.dicycat.kroy.misc.StatBar;
 import com.dicycat.kroy.misc.WaterStream;
@@ -33,17 +32,17 @@ public class FireTruck extends Entity{
 
 	private final Rectangle hitbox = new Rectangle(20, 45, 20, 20);
 
-	private final HashMap<String,Integer> DIRECTIONS = new HashMap<String,Integer>(); // Dictionary to store the possible directions the truck can face based on a key code created later
+	private final HashMap<String,Integer> DIRECTIONS = new HashMap<>(); // Dictionary to store the possible directions the truck can face based on a key code created later
 	private Integer direction = 0; // Direction the truck is facing
 
 	private WaterStream water;
-	private StatBar tank;
-	private StatBar healthBar;
+	private final StatBar tank;
+	private final StatBar healthBar;
 	private boolean firing, hasSpeed, hasDamage, hasShield; //Booleans to track what powerups the truck has active
 	private float speedTimer, damageTimer, shieldTimer; //Timers to track when powerups needs to be removed
-	private float range;
+	private final float range;
 	//ASSESSMENT 4 START
-	private int truckNum; //Used to keep track of the colour of the truck
+	private final int truckNum; //Used to keep track of the colour of the truck
 	//ASSESSMENT 4 END
 
 	public FireTruck(Vector2 spawnPos, Float[] truckStats, int truckNum) {
@@ -69,7 +68,7 @@ public class FireTruck extends Entity{
 		range = truckStats[3];			// Range of the truck
 
 		firing = false;
-		water = new WaterStream(Vector2.Zero);
+		water = new WaterStream(Vector2.Zero, "lightBlue.png");
 
 		tank = new StatBar(Vector2.Zero, "Blue.png", 3);
 		Kroy.mainGameScreen.addGameObject(tank);
@@ -166,8 +165,12 @@ public class FireTruck extends Entity{
 				firing = false;
 				water.setRemove(true);
 			}else if(!firing){					//Adds the water stream if something comes into range
-				water= new WaterStream(Vector2.Zero);
-				firing=true;
+				if (hasDamage) {
+					water = new WaterStream(Vector2.Zero, "darkBlue.png");
+				} else {
+					water = new WaterStream(Vector2.Zero, "lightBlue.png");
+				}
+				firing =true;
 				Kroy.mainGameScreen.addGameObject(water);		//initialises water as a WaterStream
 			}
 

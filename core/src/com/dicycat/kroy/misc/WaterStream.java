@@ -3,6 +3,7 @@ package com.dicycat.kroy.misc;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.GameObject;
+import com.dicycat.kroy.screens.GameScreen;
 
 /**
 * Sprite used to represent where the player is shooting
@@ -11,17 +12,20 @@ import com.dicycat.kroy.GameObject;
 */
 public class WaterStream extends GameObject{
 
+	//ASSESSMENT 4 START
 	/**
 	 * initialises the water stream at a given position
-	 * @param spawnPos
+	 * @param spawnPos the position to add the stream
+	 * @param textureString the colour of the stream
 	 */
-	public WaterStream(Vector2 spawnPos) {
-		super(spawnPos, new Texture("lightBlue.png"), new Vector2(1,1));
+	public WaterStream(Vector2 spawnPos, String textureString) {
+			super(spawnPos, new Texture(textureString), new Vector2(1, 2));
 	}
+	//ASSESSMENT 4 END
 	
 	/**
 	 * Changes the length of the sprite to x
-	 * @param x
+	 * @param x the length to set it to
 	 */
 	public void setRange(float x){
 		sprite.setScale(x,2);
