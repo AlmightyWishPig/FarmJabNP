@@ -140,7 +140,7 @@ public class MenuScreen implements Screen{
 	  controlsButtonActiveTexture = new Texture("controls_ACTIVE.png"); // control button texture when the mouse is hovering over the button
 	// CONTROL_SCREEN_5 - END OF MODIFICATION - NP STUDIOS - JORDAN SPOONER
 
-	  background = new Texture ("fireforce.jpg");
+	  background = new Texture ("fireforce.png");
 	  
 	  gamecam = new OrthographicCamera();    //m
 	  gameport = new FitViewport(Kroy.width, Kroy.height, gamecam);
