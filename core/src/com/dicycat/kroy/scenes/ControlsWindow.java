@@ -95,7 +95,7 @@ public class ControlsWindow {
 	 */
 	private void formatControlsScreen() {
 		table.setBackground(background);
-		table.add(blank).fillY().height(600); //Aligns the back button
+		table.add(blank).fillY().height(700); //Aligns the back button
 		table.row().fillY();
 		table.add(back).width(centre/3.0f);
 	}
