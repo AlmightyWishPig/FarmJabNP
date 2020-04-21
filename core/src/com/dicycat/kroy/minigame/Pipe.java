@@ -92,12 +92,6 @@ public class Pipe {
      * @return true if correct, otherwise false
      */
     boolean isCorrect(){
-        if (this.rotation == this.correctRotation){
-            System.out.println("true");
-            return true;
-        }else{
-            System.out.println("false");
-            return false;
-        }
+        return this.rotation == this.correctRotation;
     }
 }
