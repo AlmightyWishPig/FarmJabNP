@@ -1,5 +1,7 @@
 package com.dicycat.kroy.entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.dicycat.kroy.Kroy;
@@ -40,11 +42,14 @@ public class FireStation extends Entity {
 	public void update(float delta){
 		if(playerInRadius()){
 			Kroy.mainGameScreen.getPlayer().repairTruck();
-			if (!Kroy.mainGameScreen.getPlayer().isFull()) {
+			//ASSESSMENT 4 START
+			//Minigame will only start when the e key is pressed
+			if (Gdx.input.isKeyPressed(Input.Keys.E)) {
 				Kroy.mainGameScreen.getPlayer().refillWater();
 				Kroy.mainGameScreen.newMinigame();
 				Kroy.mainGameScreen.setGameState(GameScreen.GameScreenState.MINIGAME);
 			}
+			//ASSESSMENT 4 END
 		}
 		if (Kroy.mainGameScreen.gameTimer <= 0) {		//Once timer is over
 			applyDamage(100);	//Destroy fire station

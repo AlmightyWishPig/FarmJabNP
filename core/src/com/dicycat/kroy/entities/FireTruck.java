@@ -370,21 +370,21 @@ public class FireTruck extends Entity{
 	private void removePowerUps(float delta){
 		if (this.hasSpeed) {
 			this.speedTimer += delta;
-			if (this.speedTimer > 5) {
+			if (this.speedTimer > 10) {
 				this.hasSpeed = false;
 				this.speedTimer = 0;
 				this.speed = (float)(this.speed / 1.3);
 			}
 		}if (this.hasDamage) {
 			this.damageTimer += delta;
-			if (this.damageTimer > 5) {
+			if (this.damageTimer > 10) {
 				this.hasDamage = false;
 				this.damageTimer = 0;
 				this.flowRate = (float)(this.flowRate / 1.3);
 			}
 		}if (this.hasShield) {
 			this.shieldTimer += delta;
-			if (this.shieldTimer > 5) {
+			if (this.shieldTimer > 7) {
 				removeShield();
 				this.shieldTimer = 0;
 				this.hasShield = false;
