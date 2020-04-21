@@ -152,10 +152,11 @@ public class GameOverScreen implements Screen{
 		  //for play button: checks if the position of the cursor is inside the coordinates of the button
 		  Button newGameButton = new Button(playButtonY, playButtonTexture, playButtonActiveTexture, game);
 		  if (newGameButton.buttonAction()) {
-			  this.dispose();
-			  game.batch.end();
-			  game.newGame();
-			  return;
+		  	  //ASSESSMENT 4 START
+			  //Now returns you to the main menu after a game over
+			  dispose();
+			  game.backToMenu();
+			  //ASSESSMENT 4 END
 		  }
 		
 			
