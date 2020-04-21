@@ -185,32 +185,32 @@ public class Minigame {
                 table.add(pipes.get(0).getButton());
                 table.add(pipes.get(1).getButton());
                 table.add(pipes.get(2).getButton());
-                table.add().width(320);
+                table.add().width(120);
 
 
                 table.row();
-                table.add().width(160);
+                table.add().width(120);
                 table.add(pipes.get(3).getButton());
                 table.add(pipes.get(4).getButton());
                 table.add(pipes.get(5).getButton());
-                table.add().width(320);
+                table.add().width(120);
 
 
                 table.row();
-                table.add().width(160);
+                table.add().width(120);
                 table.add(pipes.get(6).getButton());
                 table.add(pipes.get(7).getButton());
                 table.add(pipes.get(8).getButton());
                 table.add(new Image(new Texture("waterout.png")));
-                table.add().width(160);
+                table.add().width(120);
 
                 table.row();
-                table.add().width(160);
-                table.add().width(128);
-                table.add().width(128);
-                table.add().width(128);
+                table.add().width(120);
+                table.add().width(120);
+                table.add().width(120);
+                table.add().width(120);
                 table.add(check);
-                table.add().width(160);
+                table.add().width(120);
 
                 // Draws the puzzle out in a table where each cell is a pipe in the puzzle.
                 table.setFillParent(true);
