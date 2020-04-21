@@ -67,7 +67,7 @@ public class Fortress extends Entity {
 	public void die() {
 		super.die();
 		sprite.setTexture(deadTexture);
-		Kroy.mainGameScreen.getHud().updateScore(1000 * FireTruckSelectionScene.difficulty); //Modifies score based on difficulty
+		Kroy.mainGameScreen.getHud().updateScore((int)(1000 * FireTruckSelectionScene.difficulty * 0.5)); //Modifies score based on difficulty
 		healthBar.setRemove(true);
 		displayable = true;
 		Kroy.mainGameScreen.removeFortress();
