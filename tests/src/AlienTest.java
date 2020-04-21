@@ -20,6 +20,10 @@ public class AlienTest {
     @Before
     public void init() {
         testKroy = new Kroy();
+
+        // Problem here: Getting a nullpointerexception when I try to use this. I think this is because I don't understand the new way rendering works.
+
+        // Any Ideas? (Run the tests to see what I mean)
         testAlien = new Alien(1, 2, 100);
 
         shootingAlien = new Alien(2, 0, 100);
