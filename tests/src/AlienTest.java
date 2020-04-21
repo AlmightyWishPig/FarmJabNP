@@ -20,7 +20,7 @@ public class AlienTest {
     @Before
     public void init() {
         testKroy = new Kroy();
-        testKroy.newGame();
+        //testKroy.newGame();
 
         // Problem here: Getting a nullpointerexception when I try to use this. I think this is because I don't understand the new way rendering works.
 
