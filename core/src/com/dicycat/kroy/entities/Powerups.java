@@ -4,6 +4,7 @@ package com.dicycat.kroy.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.dicycat.kroy.GameTextures;
 import com.dicycat.kroy.Kroy;
 
 import java.io.BufferedWriter;
@@ -54,24 +55,21 @@ public class Powerups extends Entity{
             case 0:
                 this.exists = true;
                 this.type = "speed";
-                this.setTexture(new Texture("speed.png"));
                 break;
             case 1:
                 this.exists = true;
                 this.type = "damage";
-                this.setTexture(new Texture("damage.png"));
                 break;
             case 2:
                 this.exists = true;
                 this.type = "shield";
-                this.setTexture(new Texture("shield.png"));
                 break;
             case 3:
                 this.exists = true;
                 this.type = "refill";
-                this.setTexture(new Texture("refill.png"));
                 break;
         }
+        this.setTexture(Kroy.mainGameScreen.textures.getPowerup(typeNumber));
     }
 
     //Checks if the entity needs respawning
