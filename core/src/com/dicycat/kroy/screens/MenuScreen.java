@@ -30,7 +30,7 @@ public class MenuScreen implements Screen{
   //ASSESSMENT 4 START
 	//Tells the game which saveFile to load
   public static int loadFile = 0;
-  //ASSESSMENT 3 END
+  //ASSESSMENT 4 END
   private OrthographicCamera gamecam;	//m
   private Viewport gameport; 	//m
   private Texture background,
@@ -73,7 +73,7 @@ public class MenuScreen implements Screen{
   public static Music music = Gdx.audio.newMusic(Gdx.files.internal("gamemusic.mp3"));
   //ASSESSMENT 4 START
   //reduced music volume
-  public static float musicVolume = (float) 0;
+  public static float musicVolume = (float) 0.2;
   //ASSESSMENT 4 END
 
   //coordinates for Play and Exit buttons 
