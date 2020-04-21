@@ -28,7 +28,7 @@ public class MenuScreen implements Screen{
   
   private Kroy game;
   //ASSESSMENT 4 START
-	//Tells the game while saveFile to load
+	//Tells the game which saveFile to load
   public static int loadFile = 0;
   //ASSESSMENT 3 END
   private OrthographicCamera gamecam;	//m
@@ -72,8 +72,8 @@ public class MenuScreen implements Screen{
   
   public static Music music = Gdx.audio.newMusic(Gdx.files.internal("gamemusic.mp3"));
   //ASSESSMENT 4 START
-	//reduced music volume
-  public static float musicVolume = (float) 0.2;
+  //reduced music volume
+  public static float musicVolume = (float) 0;
   //ASSESSMENT 4 END
 
   //coordinates for Play and Exit buttons 

@@ -80,10 +80,10 @@ public class GameScreen implements Screen{
 	// TRUCK_SELECT_CHANGE_11 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	// Slightly edited trucks statistics to make the game more balanced.
 	private Float[][] truckStats = {	//Each list is a configuration of a specific truck. {speed, flowRate, capacity, range}
-			{450f, 1f, 400f, 300f},		//Speed
-			{300f, 2f, 400f, 300f},	    //Flow rate
-			{300f, 1f, 500f, 300f},		//Capacity
-			{300f, 1f, 400f, 450f}		//Range
+			{450f, 1f, 800f, 300f},		//Speed
+			{300f, 2f, 800f, 300f},	    //Flow rate
+			{300f, 1f, 1000f, 300f},		//Capacity
+			{300f, 1f, 800f, 450f}		//Range
 		};
 
 	// Changes variable of truckNum to activeTruck
