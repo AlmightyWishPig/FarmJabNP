@@ -7,6 +7,7 @@ import com.dicycat.kroy.bullets.Bullet;
 import com.dicycat.kroy.bullets.BulletDispenser;
 import com.dicycat.kroy.bullets.Pattern;
 import com.dicycat.kroy.misc.StatBar;
+import com.dicycat.kroy.scenes.FireTruckSelectionScene;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -66,7 +67,7 @@ public class Fortress extends Entity {
 	public void die() {
 		super.die();
 		sprite.setTexture(deadTexture);
-		Kroy.mainGameScreen.getHud().updateScore(1000);
+		Kroy.mainGameScreen.getHud().updateScore(1000 * FireTruckSelectionScene.difficulty); //Modifies score based on difficulty
 		healthBar.setRemove(true);
 		displayable = true;
 		Kroy.mainGameScreen.removeFortress();

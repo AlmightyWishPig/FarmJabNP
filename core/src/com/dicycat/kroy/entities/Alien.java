@@ -59,7 +59,7 @@ public class Alien extends Entity {
 																							// damage to the bullet dispenser.
 		currentWaypoint = 0; // Sets current waypoint as the first waypoint in the array.
 		this.movementCountdown = movementCountdown;
-		speed = 150;
+		speed = 180;
 	}
 
 	/**
