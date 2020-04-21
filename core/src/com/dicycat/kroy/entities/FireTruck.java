@@ -358,7 +358,9 @@ public class FireTruck extends Entity{
 				break;
 			case "refill":
 				this.currentWater += this.maxWater * 0.2;
-				this.healthPoints += this.maxHealthPoints * 0.2;
+				break;
+			case "repair":
+				this.healthPoints += this.maxHealthPoints * 0.5;
 				break;
 		}
 	}

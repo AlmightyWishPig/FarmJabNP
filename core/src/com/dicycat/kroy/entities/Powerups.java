@@ -43,7 +43,7 @@ public class Powerups extends Entity{
     //Sets the type of power up
     private void setType() {
         Random r = new Random();
-        typeNumber = r.nextInt(4);
+        typeNumber = r.nextInt(5);
         if (!exists) {
             defineType(typeNumber);
         }
@@ -67,6 +67,10 @@ public class Powerups extends Entity{
             case 3:
                 this.exists = true;
                 this.type = "refill";
+                break;
+            case 4:
+                this.exists = true;
+                this.type = "repair";
                 break;
         }
         this.setTexture(Kroy.mainGameScreen.textures.getPowerup(typeNumber));

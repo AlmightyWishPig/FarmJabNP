@@ -562,7 +562,7 @@ public class GameScreen implements Screen{
 				fileWriter.write("\n");
 				fileWriter.close();
 				for (FireTruck sObject : players) {
-						sObject.saveEntity(saveFile);
+					sObject.saveEntity(saveFile);
 				}
 				for (Fortress sObject : fortresses) {
 					sObject.saveEntity(saveFile);
@@ -626,8 +626,8 @@ public class GameScreen implements Screen{
 		lineNo++;
 		float y = parseFloat(saveInfo.get(lineNo));
 		lineNo++;
-		//Bullet bullet = new Bullet(new Vector2 (x,y), new Vector2 (xvel,yvel),  speed, (maxdist - traveldist), bulletDamage);
-		//Kroy.mainGameScreen.addGameObject(bullet);
+		Bullet bullet = new Bullet(new Vector2 (x,y), new Vector2 (xvel,yvel),  speed, (maxdist - traveldist), bulletDamage);
+		Kroy.mainGameScreen.addGameObject(bullet);
 		return lineNo;
 	}
 

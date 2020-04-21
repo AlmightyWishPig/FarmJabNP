@@ -1,6 +1,7 @@
 package com.dicycat.kroy;
 
 import com.badlogic.gdx.graphics.Texture;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +19,7 @@ public class GameTextures {
 	// TRUCK_SELECT_CHANGE_1 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
 	// Changed truck texture to truck0, truck1, truck2, truck3 as all the different textures will be used with our
 	// new selection method and defined the array list which will be used to store them
-	private Texture truck0, truck1, truck2, truck3, ufo, bullet, fireStation, fireStationDead, shieldtruck0, shieldtruck1, shieldtruck2,shieldtruck3, pup0, pup1, pup2, pup3;
+	private Texture truck0, truck1, truck2, truck3, ufo, bullet, fireStation, fireStationDead, shieldtruck0, shieldtruck1, shieldtruck2,shieldtruck3, pup0, pup1, pup2, pup3, pup4;
 	private ArrayList<Texture> trucks;
 	//ASSESSMENT 4 START
 	private ArrayList<Texture> shieldTrucksList;
@@ -40,7 +41,7 @@ public class GameTextures {
 	private String[] truckAddress = {"fireTruck1.png", "fireTruck2.png", "fireTruck3.png", "fireTruck4.png"};
 	//ASSESSMENT 4 START
 	private String[] shieldTrucks = {"fireTruck1shield.png","fireTruck2shield.png","fireTruck3shield.png","fireTruck4shield.png"};
-	private String[] powerups = {"speed.png", "damage.png", "shield.png","refill.png"};
+	private String[] powerups = {"speed.png", "damage.png", "shield.png","refill.png","repair.png"};
 	//ASSESSMENT 4 END
 
 	public GameTextures() {
@@ -63,7 +64,8 @@ public class GameTextures {
 		pup1 = new Texture(powerups[1]);
 		pup2 = new Texture(powerups[2]);
 		pup3 = new Texture(powerups[3]);
-		pupsList = new ArrayList<>(Arrays.asList(pup0, pup1, pup2, pup3));
+		pup4 = new Texture(powerups[4]);
+		pupsList = new ArrayList<>(Arrays.asList(pup0, pup1, pup2, pup3, pup4));
 		ufo = new Texture("ufo.png");
 		bullet = new Texture("bullet.png");
 		fireStation = new Texture("FireStationTemp.png");
