@@ -187,8 +187,8 @@ public class GameScreen implements Screen{
 		powerups.add(new Powerups(new Vector2(4085,5510))); //
 		powerups.add(new Powerups(new Vector2(3334,2630))); //
 		powerups.add(new Powerups(new Vector2(6629,2518))); //
-		//powerups.add(new Powerups(new Vector2(1478,2022))); //
-		//powerups.add(new Powerups(new Vector2(5461,1286))); //
+		powerups.add(new Powerups(new Vector2(1478,2022))); //
+		powerups.add(new Powerups(new Vector2(5461,1286))); //
 		//ASSESSMENT 4 END
 
 		//ASSESSMENT 4 START
