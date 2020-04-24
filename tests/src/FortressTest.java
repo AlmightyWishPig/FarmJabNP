@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
+// Unfortunately due to the new rendering system these tests are no longer possible
 
 @RunWith(GdxTestRunner.class)
 public class FortressTest {

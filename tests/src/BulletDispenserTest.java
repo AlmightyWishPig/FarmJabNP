@@ -57,7 +57,7 @@ public class BulletDispenserTest {
         when(mockPattern.getCooldown()).thenReturn(1f);
 
         testBulletDispenser.addPattern(mockPattern);
-        assertEquals(1f, testBulletDispenser.getPatternTime(), 0.0f);
+        assertEquals(2f, testBulletDispenser.getPatternTime(), 0.0f);
     }
 
     /**
@@ -93,7 +93,7 @@ public class BulletDispenserTest {
         testBulletDispenser.addPattern(mockPatternOne);
         testBulletDispenser.addPattern(mockPatternTwo);
 
-        assertEquals(1f, testBulletDispenser.getPatternTime(), 0.0f);
+        assertEquals(2f, testBulletDispenser.getPatternTime(), 0.0f);
     }
 
     /**
