@@ -69,7 +69,7 @@ public class GameTextures {
 		ufo = new Texture("ufo.png");
 		bullet = new Texture("bullet.png");
 		fireStation = new Texture("FireStationTemp.png");
-		fireStationDead = new Texture("FireStationTempDead.png");	
+		fireStationDead = new Texture("FireStationTempdead.png");
 	}
 
 	// TRUCK_SELECT_CHANGE_3 - START OF MODIFICATION - NP STUDIOS - LUCY IVATT----
