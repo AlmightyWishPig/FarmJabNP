@@ -40,7 +40,7 @@ public class GameTextures {
 
 	private String[] truckAddress = {"fireTruck1.png", "fireTruck2.png", "fireTruck3.png", "fireTruck4.png"};
 	//ASSESSMENT 4 START
-	private String[] shieldTrucks = {"fireTruck1shield.png","fireTruck2shield.png","fireTruck3shield.png","fireTruck4shield.png"};
+	private String[] shieldTrucks = {"fireTruck1Shield.png","fireTruck2Shield.png","fireTruck3Shield.png","fireTruck4Shield.png"};
 	private String[] powerups = {"speed.png", "damage.png", "shield.png","refill.png","repair.png"};
 	//ASSESSMENT 4 END
 
