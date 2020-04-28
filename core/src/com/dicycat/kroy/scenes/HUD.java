@@ -119,5 +119,12 @@ public class HUD {
 	public void updateScore(Integer x){
 		score += x;
 	}
+
+	//ASSESSMENT 4 START
+	//Updates the timer displayed at the top of the screen
+	public void setScreenTimer(float newScreenTimer){
+		this.screenTimer = newScreenTimer;
+	}
+	//ASSESSMENT 4 END
 }
 

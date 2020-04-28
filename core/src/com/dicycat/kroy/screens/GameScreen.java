@@ -593,6 +593,7 @@ public class GameScreen implements Screen{
 			FireTruckSelectionScene.difficulty = parseInt(reader.readLine());
 			activeTruck = parseInt(reader.readLine());
 			gameTimer = parseFloat(reader.readLine());
+			hud.setScreenTimer(gameTimer);
 			hud.updateScore(parseInt(reader.readLine()));
 			while ((line = reader.readLine()) != null) {
 				saveInfo.add(line);
