@@ -145,8 +145,8 @@ public abstract class Entity extends GameObject{
 			float y = Float.parseFloat(saveInfo.get(lineNo));
 			lineNo++; //Ensures the next call will read from the next line onwards
 			this.setPosition(new Vector2(x, y));
-			if (this instanceof Fortress && this.healthPoints <= 0) { //Kills dead fortresses
-				((Fortress) this).die();
+			if (this instanceof  Fortress) {
+				((Fortress) this).applyDamage(0); //Renders the healthbar on fortresses and kills dead fortresses
 			}
 		}
 		return (lineNo);
