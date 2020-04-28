@@ -108,8 +108,6 @@ public abstract class Entity extends GameObject{
 				}
 				fileWriter.write(Integer.toString(healthPoints));
 				fileWriter.write("\n");
-				fileWriter.write(Boolean.toString(this.isRemove()));
-				fileWriter.write("\n");
 				fileWriter.write(Float.toString(this.getPosition().x));
 				fileWriter.write("\n");
 				fileWriter.write(Float.toString(this.getPosition().y));
@@ -142,13 +140,17 @@ public abstract class Entity extends GameObject{
 			}
 			this.healthPoints = Integer.parseInt(saveInfo.get(lineNo));
 			lineNo++;
-			this.setRemove(Boolean.parseBoolean(saveInfo.get(lineNo)));
-			lineNo++;
 			float x = Float.parseFloat(saveInfo.get(lineNo));
 			lineNo++;
 			float y = Float.parseFloat(saveInfo.get(lineNo));
 			lineNo++; //Ensures the next call will read from the next line onwards
 			this.setPosition(new Vector2(x, y));
+			if (this instanceof Fortress) {
+				System.out.println(this.healthPoints);
+			}
+			if (this instanceof Fortress && this.healthPoints <= 0) { //Kills dead fortresses
+				((Fortress) this).die();
+			}
 		}
 		return (lineNo);
 	}
